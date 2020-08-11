@@ -92,4 +92,10 @@ public interface ComptabiliteDao {
      * @throws NotFoundException si aucune séquence d'écriture comptable n'est trouvée
      */
     SequenceEcritureComptable getListSequenceEcritureComptable(String pJournalCode,Integer pAnnee) throws NotFoundException;
+
+    /**
+     * Insert une nouvelle Séquence d'écriture comptable
+     * @param pSequenceEcritureComptable - la nouvelle séquence d'écriture comptable
+     */
+    void insertSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable);
 }
