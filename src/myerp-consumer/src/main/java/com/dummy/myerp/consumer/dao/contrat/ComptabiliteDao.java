@@ -98,4 +98,17 @@ public interface ComptabiliteDao {
      * @param pSequenceEcritureComptable - la nouvelle séquence d'écriture comptable
      */
     void insertSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable);
+
+    /**
+     * Met à jour la séquence d'écriture comptable.
+     * @param pSequenceEcritureComptable la séquence d'écriture comptable.
+     */
+    void updateSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable);
+
+    /**
+     * Supprime la Séquence d'Écriture Comptable d'id {@code pJournalCode} et {@code pAnnee}
+     * @param pJournalCode le code de la séquence d'écriture comptable
+     * @param pAnnee l'année de la séquence d'écriture comptable
+     */
+    void deleteSequenceEcritureComptable(String pJournalCode,Integer pAnnee);
 }
