@@ -16,6 +16,7 @@ public interface ComptabiliteDao {
 
     /**
      * Renvoie la liste des Comptes Comptables
+     *
      * @return {@link List}
      */
     List<CompteComptable> getListCompteComptable();
@@ -23,6 +24,7 @@ public interface ComptabiliteDao {
 
     /**
      * Renvoie la liste des Journaux Comptables
+     *
      * @return {@link List}
      */
     List<JournalComptable> getListJournalComptable();
@@ -32,6 +34,7 @@ public interface ComptabiliteDao {
 
     /**
      * Renvoie la liste des Écritures Comptables
+     *
      * @return {@link List}
      */
     List<EcritureComptable> getListEcritureComptable();
@@ -86,29 +89,34 @@ public interface ComptabiliteDao {
 
     /**
      * Renvoie la Séquence d'Écriture Comptable d'id {@code pJournalCode} et {@code pAnnee}
+     *
      * @param pJournalCode le code de la séquence d'écriture comptable
-     * @param pAnnee l'année de la séquence d'écriture comptable
+     * @param pAnnee       l'année de la séquence d'écriture comptable
      * @return {@link SequenceEcritureComptable}
      * @throws NotFoundException si aucune séquence d'écriture comptable n'est trouvée
      */
-    SequenceEcritureComptable getListSequenceEcritureComptable(String pJournalCode,Integer pAnnee) throws NotFoundException;
+    SequenceEcritureComptable getSequenceEcritureComptable(String pJournalCode, Integer pAnnee) throws NotFoundException;
 
     /**
      * Insert une nouvelle Séquence d'écriture comptable
+     *
      * @param pSequenceEcritureComptable - la nouvelle séquence d'écriture comptable
      */
     void insertSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable);
 
     /**
      * Met à jour la séquence d'écriture comptable.
+     *
      * @param pSequenceEcritureComptable la séquence d'écriture comptable.
      */
     void updateSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable);
 
     /**
      * Supprime la Séquence d'Écriture Comptable d'id {@code pJournalCode} et {@code pAnnee}
+     *
      * @param pJournalCode le code de la séquence d'écriture comptable
-     * @param pAnnee l'année de la séquence d'écriture comptable
+     * @param pAnnee       l'année de la séquence d'écriture comptable
      */
-    void deleteSequenceEcritureComptable(String pJournalCode,Integer pAnnee);
+    void deleteSequenceEcritureComptable(String pJournalCode, Integer pAnnee);
+
 }
