@@ -24,7 +24,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class ComptabiliteManagerImplTest {
 
-    private ComptabiliteManagerImpl comptabiliteManager = new ComptabiliteManagerImpl();
+    private final ComptabiliteManagerImpl comptabiliteManager = new ComptabiliteManagerImpl();
 
     @Before
     public void setUp(){
@@ -177,10 +177,10 @@ public class ComptabiliteManagerImplTest {
         comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
-   // @Test(expected = FunctionalException.class)
-    @ParameterizedTest(name = "{0} test")
+
+    @ParameterizedTest(name = "{0} bad référence throw FunctionalException")
     @ValueSource(strings = {"AC-20m0/00001","ACA-2020/00001","AC-200/000X1","AC-2020/000018","AC-2020/0018"})
-    public void checkEcritureComptableUnitRG5_BadFormat_ThrowFunctionalException(String ref) throws Exception {
+    public void checkEcritureComptableUnitRG5_BadFormat_ThrowFunctionalException(String ref){
         System.out.println("valeur = "+ref);
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
@@ -197,7 +197,7 @@ public class ComptabiliteManagerImplTest {
                 new BigDecimal(123)));
 
 
-        Assertions.assertThrows(FunctionalException.class,() -> {comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable);});
+        Assertions.assertThrows(FunctionalException.class,() -> comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable));
     }
 
      @Test(expected = FunctionalException.class)
@@ -238,6 +238,141 @@ public class ComptabiliteManagerImplTest {
         comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
+    @Test
+    public void checkEcritureComptableContext() throws Exception {
+
+        EcritureComptable ecritureComptable;
+        ecritureComptable = new EcritureComptable();
+        ecritureComptable.setId(1);
+        ecritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptable.setDate(new Date());
+        ecritureComptable.setReference("AC-2018/00001");
+        ecritureComptable.setLibelle("Libellé");
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        DaoProxy daoProxy = Mockito.mock(DaoProxy.class);
+        ComptabiliteDao comptabiliteDao = Mockito.mock(ComptabiliteDao.class);
+
+        Mockito.when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
+        Mockito.when(comptabiliteDao.getEcritureComptableByRef("AC-2018/00001")).thenReturn(ecritureComptable);
+
+        AbstractBusinessManager.configure(null, daoProxy, null);
+        comptabiliteManager.checkEcritureComptableContext(ecritureComptable);
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void checkEcritureComptableContextRG6_double_throwFunctionalException() throws Exception {
+
+        EcritureComptable ecritureComptable;
+        ecritureComptable = new EcritureComptable();
+        ecritureComptable.setId(1);
+        ecritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptable.setDate(new Date());
+        ecritureComptable.setReference("AC-2018/00001");
+        ecritureComptable.setLibelle("Libellé");
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        EcritureComptable ecritureComptableDouble;
+        ecritureComptableDouble = new EcritureComptable();
+        ecritureComptableDouble.setId(2);
+        ecritureComptableDouble.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptableDouble.setDate(new Date());
+        ecritureComptableDouble.setReference("AC-2018/00001");
+        ecritureComptableDouble.setLibelle("Libellé");
+        ecritureComptableDouble.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptableDouble.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        DaoProxy daoProxy = Mockito.mock(DaoProxy.class);
+        ComptabiliteDao comptabiliteDao = Mockito.mock(ComptabiliteDao.class);
+
+        Mockito.when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
+        Mockito.when(comptabiliteDao.getEcritureComptableByRef("AC-2018/00001")).thenReturn(ecritureComptable);
+
+        AbstractBusinessManager.configure(null, daoProxy, null);
+        comptabiliteManager.checkEcritureComptableContext(ecritureComptableDouble);
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void checkEcritureComptableContextRG6_NewEcritureComptableFound_throwFunctionalException() throws Exception {
+
+        EcritureComptable ecritureComptable;
+        ecritureComptable = new EcritureComptable();
+        ecritureComptable.setId(1);
+        ecritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptable.setDate(new Date());
+        ecritureComptable.setReference("AC-2018/00001");
+        ecritureComptable.setLibelle("Libellé");
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        EcritureComptable ecritureComptableDouble;
+        ecritureComptableDouble = new EcritureComptable();
+        ecritureComptableDouble.setId(2);
+        ecritureComptableDouble.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptableDouble.setDate(new Date());
+        ecritureComptableDouble.setReference("AC-2018/00002");
+        ecritureComptableDouble.setLibelle("Libellé");
+        ecritureComptableDouble.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptableDouble.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        DaoProxy daoProxy = Mockito.mock(DaoProxy.class);
+        ComptabiliteDao comptabiliteDao = Mockito.mock(ComptabiliteDao.class);
+
+        Mockito.when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
+        Mockito.when(comptabiliteDao.getEcritureComptableByRef("AC-2018/00001")).thenReturn(ecritureComptableDouble);
+
+        AbstractBusinessManager.configure(null, daoProxy, null);
+        comptabiliteManager.checkEcritureComptableContext(ecritureComptable);
+    }
+
+    @Test
+    public void checkEcritureComptableContextRG6_EcritureComptableNotFound_throwFunctionalException() throws Exception {
+
+        EcritureComptable ecritureComptable;
+        ecritureComptable = new EcritureComptable();
+        ecritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptable.setDate(new Date());
+        ecritureComptable.setReference("AC-2018/00001");
+        ecritureComptable.setLibelle("Libellé");
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        DaoProxy daoProxy = Mockito.mock(DaoProxy.class);
+        ComptabiliteDao comptabiliteDao = Mockito.mock(ComptabiliteDao.class);
+
+        Mockito.when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
+        Mockito.doThrow(NotFoundException.class).when(comptabiliteDao).getEcritureComptableByRef("AC-2018/00001");
+
+        AbstractBusinessManager.configure(null, daoProxy, null);
+        comptabiliteManager.checkEcritureComptableContext(ecritureComptable);
+    }
+
 
     @Test
     public void addReference_NoReturn_EcritureComptable() throws NotFoundException {
@@ -266,7 +401,7 @@ public class ComptabiliteManagerImplTest {
         Mockito.when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
         Mockito.when(comptabiliteDao.getSequenceEcritureComptable("VE",2020)).thenReturn(sequenceEcritureComptable);
 
-        comptabiliteManager.configure(null,daoProxy,transactionManager);
+        AbstractBusinessManager.configure(null,daoProxy,transactionManager);
         comptabiliteManager.addReference(ecritureComptable);
 
         Assert.assertEquals(ecritureComptable.toString(),"VE-2020/00017",ecritureComptable.getReference());
