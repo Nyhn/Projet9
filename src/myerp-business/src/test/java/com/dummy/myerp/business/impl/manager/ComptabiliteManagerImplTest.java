@@ -31,6 +31,13 @@ public class ComptabiliteManagerImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test(expected = FunctionalException.class)
+    public void checkEcritureComptableUnitViolation() throws Exception {
+        EcritureComptable vEcritureComptable;
+        vEcritureComptable = new EcritureComptable();
+        comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable);
+    }
+
     @Test
     public void checkEcritureComptableUnit() throws Exception {
         EcritureComptable vEcritureComptable;
@@ -40,18 +47,11 @@ public class ComptabiliteManagerImplTest {
         vEcritureComptable.setReference("AC-2020/00001");
         vEcritureComptable.setLibelle("Libelle");
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
-                                                                                 null, new BigDecimal(123),
-                                                                                 null));
+                null, new BigDecimal(123),
+                null));
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
-                                                                                 null, null,
-                                                                                 new BigDecimal(123)));
-        comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable);
-    }
-
-    @Test(expected = FunctionalException.class)
-    public void checkEcritureComptableUnitViolation() throws Exception {
-        EcritureComptable vEcritureComptable;
-        vEcritureComptable = new EcritureComptable();
+                null, null,
+                new BigDecimal(123)));
         comptabiliteManager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
@@ -181,7 +181,7 @@ public class ComptabiliteManagerImplTest {
     @ParameterizedTest(name = "{0} bad référence throw FunctionalException")
     @ValueSource(strings = {"AC-20m0/00001","ACA-2020/00001","AC-200/000X1","AC-2020/000018","AC-2020/0018"})
     public void checkEcritureComptableUnitRG5_BadFormat_ThrowFunctionalException(String ref){
-        System.out.println("valeur = "+ref);
+
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setId(1);
@@ -373,6 +373,38 @@ public class ComptabiliteManagerImplTest {
         comptabiliteManager.checkEcritureComptableContext(ecritureComptable);
     }
 
+    /**
+     * Vérification RG6.
+     * Test passant.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void checkEcritureComptable_NoReturn_NotThrowException() throws Exception {
+
+        EcritureComptable ecritureComptable;
+        ecritureComptable = new EcritureComptable();
+        ecritureComptable.setId(1);
+        ecritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        ecritureComptable.setDate(new Date());
+        ecritureComptable.setReference("AC-2020/00001");
+        ecritureComptable.setLibelle("Libellé");
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        ecritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        DaoProxy daoProxy = Mockito.mock(DaoProxy.class);
+        ComptabiliteDao comptabiliteDao = Mockito.mock(ComptabiliteDao.class);
+
+        Mockito.when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
+        Mockito.when(comptabiliteDao.getEcritureComptableByRef("AC-2020/00001")).thenReturn(ecritureComptable);
+
+        AbstractBusinessManager.configure(null, daoProxy, null);
+        comptabiliteManager.checkEcritureComptable(ecritureComptable);
+    }
 
     @Test
     public void addReference_NoReturn_EcritureComptable() throws NotFoundException {

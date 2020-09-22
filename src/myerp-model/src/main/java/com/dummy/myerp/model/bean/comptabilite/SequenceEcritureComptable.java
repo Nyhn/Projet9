@@ -1,6 +1,9 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * Bean représentant une séquence pour les références d'écriture comptable
  */
