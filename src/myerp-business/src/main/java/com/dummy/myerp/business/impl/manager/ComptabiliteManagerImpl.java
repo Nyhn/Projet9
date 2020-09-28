@@ -84,7 +84,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                     .append("/")
                     .append(StringUtils.leftPad(String.valueOf(sequenceEcritureComptable.getDerniereValeur()),5,"0"));
             pEcritureComptable.setReference(reference.toString());
-            updateSequenceEcritureComptable(sequenceEcritureComptable);
+            //updateSequenceEcritureComptable(sequenceEcritureComptable);
         }catch (NotFoundException e){
             SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(journalCode,annee,1);
             reference.append(journalCode)
@@ -93,7 +93,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                     .append("/")
                     .append(StringUtils.leftPad(String.valueOf(1),5,"0"));
             pEcritureComptable.setReference(reference.toString());
-            insertSequenceEcritureComptable(sequenceEcritureComptable);
+            //insertSequenceEcritureComptable(sequenceEcritureComptable);
 
         }
 
