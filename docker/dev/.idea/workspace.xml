@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8987322d-fdcf-4946-805d-fad9943e4b07" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dev.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/BusinessTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/contrat/BusinessProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/contrat/BusinessProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/contrat/manager/ComptabiliteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/contrat/manager/ComptabiliteManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/AbstractBusinessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/AbstractBusinessManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/BusinessProxyImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/BusinessProxyImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/TransactionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/TransactionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/manager/ComptabiliteManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/java/com/dummy/myerp/business/impl/manager/ComptabiliteManagerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/resources/com/dummy/myerp/business/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/resources/com/dummy/myerp/business/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/main/resources/com/dummy/myerp/business/transactionContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/main/resources/com/dummy/myerp/business/transactionContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/BusinessTestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/BusinessTestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/SpringRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/SpringRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/TestInitSpring.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/TestInitSpring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/bootstrapContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/java/com/dummy/myerp/testbusiness/business/bootstrapContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/resources/com/dummy/myerp/test-business/business/datasourceContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test-business/resources/com/dummy/myerp/test-business/business/datasourceContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test/java/com/dummy/myerp/business/impl/manager/ComptabiliteManagerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test/java/com/dummy/myerp/business/impl/manager/ComptabiliteManagerImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-business/src/test/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-business/src/test/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/ConsumerHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/ConsumerHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/contrat/ComptabiliteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/contrat/ComptabiliteDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/contrat/DaoProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/contrat/DaoProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/DaoProxyImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/DaoProxyImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/cache/CompteComptableDaoCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/cache/CompteComptableDaoCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/cache/JournalComptableDaoCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/cache/JournalComptableDaoCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/dao/ComptabiliteDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/dao/ComptabiliteDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/CompteComptableRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/CompteComptableRM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/EcritureComptableRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/EcritureComptableRM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/JournalComptableRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/JournalComptableRM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/LigneEcritureComptableRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/LigneEcritureComptableRM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/SequenceEcritureComptableRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/dao/impl/db/rowmapper/comptabilite/SequenceEcritureComptableRM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/db/AbstractDbConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/db/AbstractDbConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/db/DataSourcesEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/db/DataSourcesEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/db/helper/ResultSetHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/java/com/dummy/myerp/consumer/db/helper/ResultSetHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/resources/com/dummy/myerp/consumer/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/resources/com/dummy/myerp/consumer/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/resources/com/dummy/myerp/consumer/sqlContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-consumer/src/main/resources/com/dummy/myerp/consumer/sqlContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/CompteComptable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/CompteComptable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/EcritureComptable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/EcritureComptable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/JournalComptable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/JournalComptable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/LigneEcritureComptable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/LigneEcritureComptable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/SequenceEcritureComptable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/bean/comptabilite/SequenceEcritureComptable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/validation/constraint/MontantComptable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/java/com/dummy/myerp/model/validation/constraint/MontantComptable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/main/resources/com/dummy/myerp/model/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/main/resources/com/dummy/myerp/model/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/CompteComptableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/CompteComptableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/EcritureComptableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/EcritureComptableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/JournalComptableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/JournalComptableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/LigneEcritureComptableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/LigneEcritureComptableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/SequenceEcritureComptableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-model/src/test/java/com/dummy/myerp/model/bean/comptabilite/SequenceEcritureComptableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/exception/FunctionalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/exception/FunctionalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/exception/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/exception/NotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/exception/TechnicalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/exception/TechnicalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/util/spring/NullFactoryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/src/main/java/com/dummy/myerp/technical/util/spring/NullFactoryBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/src/main/resources/com/dummy/myerp/technical/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/src/main/resources/com/dummy/myerp/technical/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/myerp-technical/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/myerp-technical/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/src/build/checkstyle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/src/build/checkstyle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/src/site/site.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/src/site/site.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:\developmentSoftware\IntelliJ\IntelliJ IDEA 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1i8YcFEO7pCfxJsTHMeqZVYosgk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8987322d-fdcf-4946-805d-fad9943e4b07" name="Default Changelist" comment="" />
+      <created>1601290763663</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601290763663</updated>
+      <workItem from="1601290764829" duration="1395000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="522" y="381" key="#SQL_Dialects" timestamp="1601290894016">
+      <screen x="62" y="0" width="3778" height="1080" />
+    </state>
+    <state x="522" y="381" key="#SQL_Dialects/62.0.3778.1080@62.0.3778.1080" timestamp="1601290894016" />
+    <state x="724" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601290900551">
+      <screen x="62" y="0" width="3778" height="1080" />
+    </state>
+    <state x="724" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/62.0.3778.1080@62.0.3778.1080" timestamp="1601290900551" />
+  </component>
+</project>
