@@ -1,5 +1,11 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
+import com.openpojo.reflection.PojoClass;
+import com.openpojo.reflection.impl.PojoClassFactory;
+import com.openpojo.validation.Validator;
+import com.openpojo.validation.ValidatorBuilder;
+import com.openpojo.validation.test.impl.GetterTester;
+import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,14 +15,22 @@ import java.util.List;
 public class JournalComptableTest {
 
     @Test
+    public void validateSettersAndGetters() {
+        final PojoClass JournalComptablePojo = PojoClassFactory.getPojoClass(JournalComptable.class);
+
+        final Validator validator = ValidatorBuilder.create()
+                .with(new SetterTester(), new GetterTester())
+                .build();
+        validator.validate(JournalComptablePojo);
+    }
+
+    @Test
     public void getByCode_returnJournalComptable_listJournalComptableAndCode(){
         JournalComptable journalComptable1 = new JournalComptable();
         journalComptable1.setCode("21");
         journalComptable1.setLibelle("journal comptable 1");
 
-        JournalComptable journalComptable2 = new JournalComptable();
-        journalComptable2.setCode("67");
-        journalComptable2.setLibelle("journal comptable 2");
+        JournalComptable journalComptable2 = new JournalComptable("67","journal comptable 2");
 
         JournalComptable journalComptable3 = new JournalComptable();
         journalComptable3.setCode("29");

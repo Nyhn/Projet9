@@ -66,6 +66,14 @@
             <artifactId>hibernate-validator</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.openpojo/openpojo -->
+        <dependency>
+            <groupId>com.openpojo</groupId>
+            <artifactId>openpojo</artifactId>
+            <version>0.8.13</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 

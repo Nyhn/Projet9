@@ -119,6 +119,12 @@
         <dependencies>
             <!-- ========== Modules ========== -->
             <dependency>
+                <groupId>com.openpojo</groupId>
+                <artifactId>openpojo</artifactId>
+                <version>0.8.13</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>myerp-technical</artifactId>
                 <version>${project.version}</version>

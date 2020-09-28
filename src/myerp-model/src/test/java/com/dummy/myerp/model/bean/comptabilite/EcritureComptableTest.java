@@ -2,12 +2,28 @@ package com.dummy.myerp.model.bean.comptabilite;
 
 import java.math.BigDecimal;
 
+import com.openpojo.reflection.PojoClass;
+import com.openpojo.reflection.impl.PojoClassFactory;
+import com.openpojo.validation.Validator;
+import com.openpojo.validation.ValidatorBuilder;
+import com.openpojo.validation.test.impl.GetterTester;
+import com.openpojo.validation.test.impl.SetterTester;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
 
 public class EcritureComptableTest {
+
+    @Test
+    public void validateSettersAndGetters() {
+        final PojoClass EcritureComptablePojo = PojoClassFactory.getPojoClass(EcritureComptable.class);
+
+        final Validator validator = ValidatorBuilder.create()
+                .with(new SetterTester(), new GetterTester())
+                .build();
+        validator.validate(EcritureComptablePojo);
+    }
 
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
