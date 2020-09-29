@@ -69,7 +69,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                 4.  Enregistrer (insert/update) la valeur de la séquence en persitance
                     (table sequence_ecriture_comptable)
          */
-
         int annee = Year.now().getValue();
         String journalCode = pEcritureComptable.getJournal().getCode();
         StringBuilder reference = new StringBuilder();
@@ -77,14 +76,13 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         try{
             SequenceEcritureComptable sequenceEcritureComptable = getDaoProxy().getComptabiliteDao().getSequenceEcritureComptable(journalCode,annee);
             sequenceEcritureComptable.setDerniereValeur(sequenceEcritureComptable.getDerniereValeur() + 1);
-
             reference.append(journalCode)
                     .append("-")
                     .append(annee)
                     .append("/")
                     .append(StringUtils.leftPad(String.valueOf(sequenceEcritureComptable.getDerniereValeur()),5,"0"));
             pEcritureComptable.setReference(reference.toString());
-            //updateSequenceEcritureComptable(sequenceEcritureComptable);
+            updateSequenceEcritureComptable(sequenceEcritureComptable);
         }catch (NotFoundException e){
             SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(journalCode,annee,1);
             reference.append(journalCode)
@@ -93,8 +91,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                     .append("/")
                     .append(StringUtils.leftPad(String.valueOf(1),5,"0"));
             pEcritureComptable.setReference(reference.toString());
-            //insertSequenceEcritureComptable(sequenceEcritureComptable);
-
+            insertSequenceEcritureComptable(sequenceEcritureComptable);
         }
 
     }
