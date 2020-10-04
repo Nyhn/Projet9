@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 public class ConsumerTest extends ConsumerTestCase {
 
-    private ComptabiliteDaoImpl vDao = ComptabiliteDaoImpl.getInstance();
+    private ComptabiliteDaoImpl comptabiliteDao = ComptabiliteDaoImpl.getInstance();
 
     private EcritureComptable createEcritureComptable(Integer id, JournalComptable journalComptable, String reference, Date date, String libelle, List<LigneEcritureComptable> listLigneEcriture) {
         EcritureComptable ecritureComptable = new EcritureComptable();
@@ -43,93 +43,119 @@ public class ConsumerTest extends ConsumerTestCase {
     }
 
     /**
-     * Vérification récupération liste des comptes comptables.
-     * Test passant :
-     * - taille de la liste > 0
-     * - contient un élément ayant comme numéro "401" et un libellé "Fournisseurs"
+     * Test de récupération de la liste de compte comptable
+     * et vérification que la liste contient 7 élèments
+     * et que le premier élèment de la liste est égale au numéro "401" et au libellé "Fournisseurs"
      */
     @Test
-    public void getListCompteComptableTest() {
-        List<CompteComptable> vListComptes = vDao.getListCompteComptable();
+    public void getListCompteComptableTest_checkFirstCompteComptableAndSizeListEqual7() {
+        List<CompteComptable> listCompteComptable = comptabiliteDao.getListCompteComptable();
 
-        assertTrue("La liste des comptes est vide", vListComptes.size() > 0 );
-        Iterator it = vListComptes.listIterator();
-        boolean testOk = false;
-        while (it.hasNext()) {
-            CompteComptable compte = (CompteComptable) it.next();
-            if(compte.getNumero() == 401 && StringUtils.equals(compte.getLibelle(),"Fournisseurs")) {
-                testOk = true;
-                break;
-            }
+        assertTrue("La liste des comptes est différent de 7", listCompteComptable.size() == 7 );
+
+        boolean testCheck = false;
+        if(listCompteComptable.get(0).getNumero() == 401 && StringUtils.equals(listCompteComptable.get(0).getLibelle(),"Fournisseurs")){
+            testCheck = true;
         }
-        assertTrue("Le compte de numéro 401 et de libellé Fournisseurs n'a pas été trouvé", testOk);
+//        Iterator iterator = listCompteComptable.listIterator();
+//        boolean testCheck= false;
+//        while (iterator.hasNext()) {
+//            CompteComptable compte = (CompteComptable) iterator.next();
+//            if(compte.getNumero() == 401 && StringUtils.equals(compte.getLibelle(),"Fournisseurs")) {
+//                testCheck = true;
+//                break;
+//            }
+//        }
+        assertTrue("Le compte de numéro 401 et de libellé Fournisseurs n'existe pas ou n'est pas le premier élèment de la liste", testCheck);
     }
 
     /**
-     * Vérification récupération liste des journaux comptables.
-     * Test passant :
-     * - taille de la liste > 0
-     * - contient un élément ayant comme numéro "AC"  et un libellé "Achat"
+     * Test de récupération de la liste de journal comptable
+     * et vérification que la liste contient 4 élèments
+     * et que le premier élèment de la liste est égale au code "AC" et au libellé "Achat"
      */
     @Test
-    public void getListJournalComptableTest() {
-        List<JournalComptable> vListJournaux = vDao.getListJournalComptable();
+    public void getListJournalComptableTest_checkFirstJournalComptableAndSIzeListEqual4() {
+        List<JournalComptable> listJournalComptable = comptabiliteDao.getListJournalComptable();
         
-        assertTrue("La liste des journaux est vide", vListJournaux.size() > 0);
-        Iterator it = vListJournaux.listIterator();
-        boolean testOk = false;
-        while (it.hasNext()) {
-            JournalComptable journal = (JournalComptable) it.next();
-            if(StringUtils.equals(journal.getCode(), "AC") && StringUtils.equals(journal.getLibelle(), "Achat")) {
-                testOk = true;
-                break;
-            }
+        assertTrue("La liste des journaux est différent de 4", listJournalComptable.size() == 4);
+        boolean testCheck = false;
+        if(StringUtils.equals(listJournalComptable.get(0).getCode(),"AC") && StringUtils.equals(listJournalComptable.get(0).getLibelle(),"Achat"))
+        {
+            testCheck = true;
         }
-        assertTrue("Le journal de code AC et de libellé Achat n'a pas été trouvé", testOk);
+//        Iterator iterator = listJournalComptable.listIterator();
+//        boolean testCheck = false;
+//        while (iterator.hasNext()) {
+//            JournalComptable journal = (JournalComptable) iterator.next();
+//            if(StringUtils.equals(journal.getCode(), "AC") && StringUtils.equals(journal.getLibelle(), "Achat")) {
+//                testCheck = true;
+//                break;
+//            }
+//        }
+        assertTrue("Le journal de code AC et de libellé Achat n'existe pas ou n'est pas le premier élèment de la liste", testCheck);
     }
 
     /**
-     * Vérification récupération liste des écritures comptables.
-     * Test passant :
+     * Test de récupération de la liste des écritures comptables
+     * Vérification que la taille de liste est égale à 5
+     * et que la première écriture comptable vaut :
      * - id = -5
      * - code journal = BQ
      * - reference = BQ-2016/00005
      * - data = 2016/12/27 00:00:00
      * - libellé = Paiement Facture C110002
-     * - 2 lignes d'écriture associées à cette écriture
-     * - Code compte comptable ligne écriture 2 = 411
-     * - Crédit ligne écriture 2 = 3000
+     * - 2 lignes d'écriture :
+     *      - Code compte comptable ligne écriture 2 = 411
+     *      - Crédit ligne écriture 2 = 3000
      *
      */
     @Test
-    public void getListEcritureComptableTest() throws ParseException {
-        List<EcritureComptable> vListEcritures = vDao.getListEcritureComptable();
+    public void getListEcritureComptableTest_checkFirstEcritureComptableAndSizeListEqual5() throws ParseException {
+        List<EcritureComptable> listEcritureComptable = comptabiliteDao.getListEcritureComptable();
 
-        assertTrue("La liste des écritures est vide", vListEcritures.size() > 0);
+        assertTrue("La liste des écritures n'est pas égale à 5", listEcritureComptable.size() == 5);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date dateAttendue = dateFormat.parse("2016/12/27 00:00:00");
-        Iterator it = vListEcritures.listIterator();
-        boolean testOk = false;
-        while (it.hasNext()) {
-            EcritureComptable ecriture = (EcritureComptable) it.next();
-            if(ecriture.getId() == -5 &&
-                StringUtils.equals(ecriture.getJournal().getCode(), "BQ") &&
-                StringUtils.equals(ecriture.getReference(), "BQ-2016/00005") &&
-                StringUtils.equals(ecriture.getLibelle(), "Paiement Facture C110002") &&
-                ecriture.getDate().compareTo(dateAttendue) == 0 &&
-                ecriture.getListLigneEcriture().size() == 2 &&
-                ecriture.getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
-                ecriture.getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
-            {
-                testOk = true;
-                break;
-            }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2016/12/27 00:00:00");
+        boolean testCheck = false;
+        if(listEcritureComptable.get(0).getId() == -5 &&
+                StringUtils.equals(listEcritureComptable.get(0).getJournal().getCode(), "BQ") &&
+                StringUtils.equals(listEcritureComptable.get(0).getReference(), "BQ-2016/00005") &&
+                StringUtils.equals(listEcritureComptable.get(0).getLibelle(), "Paiement Facture C110002") &&
+                listEcritureComptable.get(0).getDate().compareTo(date) == 0 &&
+                listEcritureComptable.get(0).getListLigneEcriture().size() == 2 &&
+                listEcritureComptable.get(0).getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
+                listEcritureComptable.get(0).getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
+        {
+            testCheck = true;
         }
-        assertTrue("L'écriture comptabel d'ID -5, de code journal BQ, de référence BQ-2016/00005, de date 2016/12/27 00:00:00 et de libellé Paiement Facture C110002 n'a pas été trouvé", testOk);
+
+
+
+//        Iterator iterator = listEcritureComptable.listIterator();
+//        boolean testCheck = false;
+//        while (iterator.hasNext()) {
+//            EcritureComptable ecriture = (EcritureComptable) iterator.next();
+//            if(ecriture.getId() == -5 &&
+//                StringUtils.equals(ecriture.getJournal().getCode(), "BQ") &&
+//                StringUtils.equals(ecriture.getReference(), "BQ-2016/00005") &&
+//                StringUtils.equals(ecriture.getLibelle(), "Paiement Facture C110002") &&
+//                ecriture.getDate().compareTo(listEcritureComptable.get(0)) == 0 &&
+//                ecriture.getListLigneEcriture().size() == 2 &&
+//                ecriture.getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
+//                ecriture.getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
+//            {
+//                testCheck = true;
+//                break;
+//            }
+//        }
+        assertTrue("L'écriture comptabel d'ID -5, de code journal BQ, de référence BQ-2016/00005, de date 2016/12/27 00:00:00 et de libellé Paiement Facture C110002 n'existe pas ou n'est pas le premier élèment de la liste", testCheck);
     }
 
     /**
+     * Test de récupération d'une écriture comptable par son id
+     *
      * Vérification récupération d'une écriture comptable par son id.
      * Test passant.
      * - id = -4
@@ -146,7 +172,7 @@ public class ConsumerTest extends ConsumerTestCase {
     public void getEcritureComptableTest() throws ParseException {
         EcritureComptable ecriture = new EcritureComptable();
         try {
-            ecriture = vDao.getEcritureComptable(-4);
+            ecriture = comptabiliteDao.getEcritureComptable(-4);
         } catch (NotFoundException e) {
             fail();
         }
@@ -176,7 +202,7 @@ public class ConsumerTest extends ConsumerTestCase {
      */
     @Test(expected = NotFoundException.class)
     public void getEcritureComptableTestNotFound() throws NotFoundException {
-        vDao.getEcritureComptable(99);
+        comptabiliteDao.getEcritureComptable(99);
     }
 
     /**
@@ -196,7 +222,7 @@ public class ConsumerTest extends ConsumerTestCase {
     public void getEcritureComptableByRefTest() throws ParseException {
         EcritureComptable ecriture = new EcritureComptable();
         try {
-            ecriture = vDao.getEcritureComptableByRef("VE-2016/00004");
+            ecriture = comptabiliteDao.getEcritureComptableByRef("VE-2016/00004");
         } catch (NotFoundException e) {
             fail();
         }
@@ -226,7 +252,7 @@ public class ConsumerTest extends ConsumerTestCase {
      */
     @Test(expected = NotFoundException.class)
     public void getEcritureComptableByRefTestNotFound() throws NotFoundException {
-        vDao.getEcritureComptableByRef("ZZ-2018/90004");
+        comptabiliteDao.getEcritureComptableByRef("ZZ-2018/90004");
     }
 
     /**
@@ -259,7 +285,7 @@ public class ConsumerTest extends ConsumerTestCase {
 
         EcritureComptable ecriture = createEcritureComptable(-4, journal, "VE-2016/00004", date,"TMA Appli Yyy", listLigneEcriture );
 
-        vDao.loadListLigneEcriture(ecriture);
+        comptabiliteDao.loadListLigneEcriture(ecriture);
 
         boolean testOk = false;
         if(ecriture.getId() == -4 &&
@@ -297,9 +323,9 @@ public class ConsumerTest extends ConsumerTestCase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = dateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journal = vDao.getListJournalComptable().get(0);
+        JournalComptable journal = comptabiliteDao.getListJournalComptable().get(0);
 
-        CompteComptable compte = vDao.getListCompteComptable().get(0);
+        CompteComptable compte = comptabiliteDao.getListCompteComptable().get(0);
         LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
         LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
@@ -307,10 +333,10 @@ public class ConsumerTest extends ConsumerTestCase {
         listLigneEcriture.add(ligneEcriture2);
 
         EcritureComptable ecritureComptable = createEcritureComptable(null, journal, "ZZ-2018/00001", date, "ecriture insérée", listLigneEcriture);
-        vDao.insertEcritureComptable(ecritureComptable);
+        comptabiliteDao.insertEcritureComptable(ecritureComptable);
         boolean testOk = false;
         try {
-            EcritureComptable ecritureInseree = vDao.getEcritureComptable(ecritureComptable.getId());
+            EcritureComptable ecritureInseree = comptabiliteDao.getEcritureComptable(ecritureComptable.getId());
             if( ecritureInseree.getId().equals(ecritureComptable.getId()) &&
                 ecritureInseree.getDate().compareTo(ecritureComptable.getDate()) == 0 &&
                 StringUtils.equals(ecritureInseree.getJournal().getCode(), ecritureComptable.getJournal().getCode()) &&
@@ -326,7 +352,7 @@ public class ConsumerTest extends ConsumerTestCase {
             fail();
         }
         assertTrue("L'insertion de l'écriture comptable ne s'est pas faite correctement", testOk);
-        vDao.deleteEcritureComptable(ecritureComptable.getId());
+        comptabiliteDao.deleteEcritureComptable(ecritureComptable.getId());
     }
 
     /**
@@ -343,9 +369,9 @@ public class ConsumerTest extends ConsumerTestCase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = dateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journal = vDao.getListJournalComptable().get(0);
+        JournalComptable journal = comptabiliteDao.getListJournalComptable().get(0);
 
-        CompteComptable compte = vDao.getListCompteComptable().get(0);
+        CompteComptable compte = comptabiliteDao.getListCompteComptable().get(0);
         LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
         LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
@@ -353,12 +379,12 @@ public class ConsumerTest extends ConsumerTestCase {
         listLigneEcriture.add(ligneEcriture2);
 
         EcritureComptable ecritureComptable = createEcritureComptable(null, journal, "ZZ-2018/00001", date, "ecriture insérée", listLigneEcriture);
-        vDao.insertEcritureComptable(ecritureComptable);
+        comptabiliteDao.insertEcritureComptable(ecritureComptable);
 
         Date date2 = dateFormat.parse("2018/12/19 00:00:00");
-        JournalComptable journal2 = vDao.getListJournalComptable().get(1);
+        JournalComptable journal2 = comptabiliteDao.getListJournalComptable().get(1);
 
-        CompteComptable compte2 = vDao.getListCompteComptable().get(0);
+        CompteComptable compte2 = comptabiliteDao.getListCompteComptable().get(0);
         LigneEcritureComptable ligneEcriture3 = new LigneEcritureComptable(compte, "Ligne3", BigDecimal.valueOf(3500), null);
         LigneEcritureComptable ligneEcriture4 = new LigneEcritureComptable(compte, "Ligne4", null, BigDecimal.valueOf(3500));
         List<LigneEcritureComptable> listLigneEcriture2 = new ArrayList<>();
@@ -366,11 +392,11 @@ public class ConsumerTest extends ConsumerTestCase {
         listLigneEcriture2.add(ligneEcriture4);
 
         EcritureComptable ecritureComptableModifiee = createEcritureComptable(ecritureComptable.getId(), journal2, "YY-2018/00001", date2, "ecriture modifié", listLigneEcriture2);
-        vDao.updateEcritureComptable(ecritureComptableModifiee);
+        comptabiliteDao.updateEcritureComptable(ecritureComptableModifiee);
 
         boolean testOk = false;
         try {
-            EcritureComptable ecriture = vDao.getEcritureComptable(ecritureComptable.getId());
+            EcritureComptable ecriture = comptabiliteDao.getEcritureComptable(ecritureComptable.getId());
             if( ecriture.getDate().compareTo(ecritureComptableModifiee.getDate()) == 0 &&
                 StringUtils.equals(ecriture.getJournal().getCode(), ecritureComptableModifiee.getJournal().getCode()) &&
                 StringUtils.equals(ecriture.getLibelle(), ecritureComptableModifiee.getLibelle()) &&
@@ -385,7 +411,7 @@ public class ConsumerTest extends ConsumerTestCase {
             fail();
         }
         assertTrue("La mise à jour de l'écriture comptable ne s'est pas faite correctement", testOk);
-        vDao.deleteEcritureComptable(ecritureComptableModifiee.getId());
+        comptabiliteDao.deleteEcritureComptable(ecritureComptableModifiee.getId());
     }
 
     /**
@@ -398,9 +424,9 @@ public class ConsumerTest extends ConsumerTestCase {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = dateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journal = vDao.getListJournalComptable().get(0);
+        JournalComptable journal = comptabiliteDao.getListJournalComptable().get(0);
 
-        CompteComptable compte = vDao.getListCompteComptable().get(0);
+        CompteComptable compte = comptabiliteDao.getListCompteComptable().get(0);
         LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
         LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
@@ -408,19 +434,19 @@ public class ConsumerTest extends ConsumerTestCase {
         listLigneEcriture.add(ligneEcriture2);
 
         EcritureComptable ecritureComptable = createEcritureComptable(null, journal, "ZZ-2018/00001", date, "ecriture insérée", listLigneEcriture);
-        vDao.insertEcritureComptable(ecritureComptable);
+        comptabiliteDao.insertEcritureComptable(ecritureComptable);
 
-        vDao.deleteEcritureComptable(ecritureComptable.getId());
+        comptabiliteDao.deleteEcritureComptable(ecritureComptable.getId());
         boolean testOk = false;
         try {
-            vDao.getEcritureComptable(ecritureComptable.getId());
+            comptabiliteDao.getEcritureComptable(ecritureComptable.getId());
         } catch (NotFoundException e) {
             testOk = true;
         }
 
         List<LigneEcritureComptable> listLigneEcriture2 = new ArrayList<>();
         EcritureComptable ecritureComptableTest = createEcritureComptable(null, journal, "ZZ-2018/00001", date, "ecriture insérée", listLigneEcriture2);
-        vDao.loadListLigneEcriture(ecritureComptableTest);
+        comptabiliteDao.loadListLigneEcriture(ecritureComptableTest);
         if(ecritureComptableTest.getListLigneEcriture().size() == ecritureComptable.getListLigneEcriture().size()) {
             testOk = false;
         }
@@ -436,7 +462,7 @@ public class ConsumerTest extends ConsumerTestCase {
      */
     @Test
     public void getSequenceEcritureComptableTest() throws NotFoundException {
-        SequenceEcritureComptable seq = vDao.getSequenceEcritureComptable("AC", 2016);
+        SequenceEcritureComptable seq = comptabiliteDao.getSequenceEcritureComptable("AC", 2016);
 
         assertEquals("La séquence d'écriture comptable n'a pas été trouvé", seq.getDerniereValeur(), Integer.valueOf(40));
     }
@@ -450,7 +476,7 @@ public class ConsumerTest extends ConsumerTestCase {
      */
     @Test(expected = NotFoundException.class)
     public void getSequenceEcritureComptableNotFound() throws NotFoundException {
-        vDao.getSequenceEcritureComptable("ZZ", 2020);
+        comptabiliteDao.getSequenceEcritureComptable("ZZ", 2020);
     }
 
     /**
@@ -463,11 +489,11 @@ public class ConsumerTest extends ConsumerTestCase {
     @Test(expected = NotFoundException.class)
     public void deleteSequenceEcritureComptableTest() throws NotFoundException {
         SequenceEcritureComptable sequence = new SequenceEcritureComptable("AC", 2055, 555);
-        vDao.insertSequenceEcritureComptable(sequence);
+        comptabiliteDao.insertSequenceEcritureComptable(sequence);
 
-        vDao.deleteSequenceEcritureComptable("AC", 2055);
+        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
         // On vérifie que la suppression s'est bien réalisée en cherchant l'élément supprimé
-        vDao.getSequenceEcritureComptable("AC", 2055);
+        comptabiliteDao.getSequenceEcritureComptable("AC", 2055);
     }
 
     /**
@@ -479,25 +505,25 @@ public class ConsumerTest extends ConsumerTestCase {
     public void insertSequenceEcritureComptableTest() throws NotFoundException {
 
         SequenceEcritureComptable sequence = new SequenceEcritureComptable("AC", 2055, 555);
-        vDao.insertSequenceEcritureComptable(sequence);
+        comptabiliteDao.insertSequenceEcritureComptable(sequence);
 
         boolean testOk = false;
-        SequenceEcritureComptable sequenceInseree = vDao.getSequenceEcritureComptable("AC", 2055);
+        SequenceEcritureComptable sequenceInseree = comptabiliteDao.getSequenceEcritureComptable("AC", 2055);
 
         assertEquals("L'insertion de la séquence ne s'est pas fait correctement", sequenceInseree.getDerniereValeur(), sequence.getDerniereValeur());
-        vDao.deleteSequenceEcritureComptable("AC", 2055);
+        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
     }
 
     @Test
     public void updateSequenceEcritureComptableTest() throws NotFoundException {
         SequenceEcritureComptable sequence = new SequenceEcritureComptable("AC", 2055, 555);
-        vDao.insertSequenceEcritureComptable(sequence);
+        comptabiliteDao.insertSequenceEcritureComptable(sequence);
 
         SequenceEcritureComptable sequence2 = new SequenceEcritureComptable("AC", 2055, 666);
-        vDao.updateSequenceEcritureComptable(sequence2);
+        comptabiliteDao.updateSequenceEcritureComptable(sequence2);
 
-        SequenceEcritureComptable sequenceModifiee = vDao.getSequenceEcritureComptable("AC", 2055);
+        SequenceEcritureComptable sequenceModifiee = comptabiliteDao.getSequenceEcritureComptable("AC", 2055);
         assertEquals("La mise à jour ne s'est pas fait correctement", sequenceModifiee.getDerniereValeur(), sequence2.getDerniereValeur());
-        vDao.deleteSequenceEcritureComptable("AC", 2055);
+        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
     }
 }
