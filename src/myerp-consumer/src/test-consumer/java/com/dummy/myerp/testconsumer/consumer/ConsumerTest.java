@@ -203,8 +203,8 @@ public class ConsumerTest extends ConsumerTestCase {
     }
 
     /**
-     * Vérification récupération d'une écriture comptable par sa référence
-     * Test passant.
+     * Test de récupération d'une écriture comptable par sa référence VE-2016/00004
+     * puis vérification des données de l'écriture comptable :
      * - id = -4
      * - code journal = VE
      * - reference = VE-2016/00004
@@ -216,29 +216,29 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
-    public void getEcritureComptableByRefTest() throws ParseException {
-        EcritureComptable ecriture = new EcritureComptable();
+    public void getEcritureComptableByRefTest_checkEcritureComptable() throws ParseException {
+        EcritureComptable ecritureComptable = new EcritureComptable();
         try {
-            ecriture = comptabiliteDao.getEcritureComptableByRef("VE-2016/00004");
+            ecritureComptable = comptabiliteDao.getEcritureComptableByRef("VE-2016/00004");
         } catch (NotFoundException e) {
             fail();
         }
-        boolean testOk = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date dateAttendue = dateFormat.parse("2016/12/28 00:00:00");
+        boolean testCheck = false;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date dateAttendue = simpleDateFormat.parse("2016/12/28 00:00:00");
 
-        if(ecriture.getId() == -4 &&
-            StringUtils.equals(ecriture.getJournal().getCode(), "VE") &&
-            StringUtils.equals(ecriture.getReference(), "VE-2016/00004") &&
-            StringUtils.equals(ecriture.getLibelle(), "TMA Appli Yyy") &&
-            ecriture.getDate().compareTo(dateAttendue) == 0 &&
-            ecriture.getListLigneEcriture().size() == 3 &&
-            ecriture.getListLigneEcriture().get(1).getCompteComptable().getNumero() == 706 &&
-            StringUtils.equals(ecriture.getListLigneEcriture().get(1).getLibelle(), "TMA Appli Xxx"))
+        if(ecritureComptable.getId() == -4 &&
+            StringUtils.equals(ecritureComptable.getJournal().getCode(), "VE") &&
+            StringUtils.equals(ecritureComptable.getReference(), "VE-2016/00004") &&
+            StringUtils.equals(ecritureComptable.getLibelle(), "TMA Appli Yyy") &&
+            ecritureComptable.getDate().compareTo(dateAttendue) == 0 &&
+            ecritureComptable.getListLigneEcriture().size() == 3 &&
+            ecritureComptable.getListLigneEcriture().get(1).getCompteComptable().getNumero() == 706 &&
+            StringUtils.equals(ecritureComptable.getListLigneEcriture().get(1).getLibelle(), "TMA Appli Xxx"))
         {
-            testOk = true;
+            testCheck = true;
         }
-        assertTrue("L'écriture comptabel d'ID -4, de code journal VE, de référence VE-2016/00004, de date 2016/12/28 00:00:00 et de libellé TMA Appli Yyy n'a pas été récupéré correctement", testOk);
+        assertTrue("L'écriture comptable d'ID -4, de code journal VE, de référence VE-2016/00004, de date 2016/12/28 00:00:00 et de libellé TMA Appli Yyy n'a pas été récupéré correctement", testCheck);
     }
 
     /**
