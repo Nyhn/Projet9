@@ -242,13 +242,13 @@ public class ConsumerTest extends ConsumerTestCase {
     }
 
     /**
-     * Vérification récupération d'une écriture comptable qui n'existe pas par sa référence.
+     * Test de récupération d'une écriture comptable inexistant par sa référence.
      * Doit renvoyer une exception NotFoundException
      *
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void getEcritureComptableByRefTestNotFound() throws NotFoundException {
+    public void getEcritureComptableByRefTest_throwNotFoundException() throws NotFoundException {
         comptabiliteDao.getEcritureComptableByRef("ZZ-2018/90004");
     }
 
