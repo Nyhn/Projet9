@@ -474,43 +474,42 @@ public class ConsumerTest extends ConsumerTestCase {
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void deleteSequenceEcritureComptableTest() throws NotFoundException {
-        SequenceEcritureComptable sequence = new SequenceEcritureComptable("AC", 2055, 555);
-        comptabiliteDao.insertSequenceEcritureComptable(sequence);
-
+    public void deleteSequenceEcritureComptableTest_ThrowNotFoundException() throws NotFoundException {
+        SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("AC", 2055, 555);
+        comptabiliteDao.insertSequenceEcritureComptable(sequenceEcritureComptable);
         comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
-        // On vérifie que la suppression s'est bien réalisée en cherchant l'élément supprimé
         comptabiliteDao.getSequenceEcritureComptable("AC", 2055);
     }
 
     /**
-     * Vérification de l'insertion d'une séquence d'écriture comptable
-     * Test passant.
-     *
+     * Test d'insertion d'une séquence d'écriture comptable
      */
     @Test
     public void insertSequenceEcritureComptableTest() throws NotFoundException {
 
-        SequenceEcritureComptable sequence = new SequenceEcritureComptable("AC", 2055, 555);
-        comptabiliteDao.insertSequenceEcritureComptable(sequence);
+        SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("AC", 2019, 15);
+        comptabiliteDao.insertSequenceEcritureComptable(sequenceEcritureComptable);
 
-        boolean testOk = false;
-        SequenceEcritureComptable sequenceInseree = comptabiliteDao.getSequenceEcritureComptable("AC", 2055);
+        SequenceEcritureComptable sequenceEcritureComptableInseree = comptabiliteDao.getSequenceEcritureComptable("AC", 2019);
 
-        assertEquals("L'insertion de la séquence ne s'est pas fait correctement", sequenceInseree.getDerniereValeur(), sequence.getDerniereValeur());
-        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
+        assertEquals("L'insertion de la séquence a échoué", sequenceEcritureComptableInseree.getDerniereValeur(), sequenceEcritureComptable.getDerniereValeur());
+        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2019);
     }
 
+    /**
+     * Test de mise à jour d'une séquence écriture comptable
+     * @throws NotFoundException
+     */
     @Test
     public void updateSequenceEcritureComptableTest() throws NotFoundException {
-        SequenceEcritureComptable sequence = new SequenceEcritureComptable("AC", 2055, 555);
-        comptabiliteDao.insertSequenceEcritureComptable(sequence);
+        SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("AC", 2019, 15);
+        comptabiliteDao.insertSequenceEcritureComptable(sequenceEcritureComptable);
 
-        SequenceEcritureComptable sequence2 = new SequenceEcritureComptable("AC", 2055, 666);
+        SequenceEcritureComptable sequence2 = new SequenceEcritureComptable("AC", 2019, 76);
         comptabiliteDao.updateSequenceEcritureComptable(sequence2);
 
-        SequenceEcritureComptable sequenceModifiee = comptabiliteDao.getSequenceEcritureComptable("AC", 2055);
-        assertEquals("La mise à jour ne s'est pas fait correctement", sequenceModifiee.getDerniereValeur(), sequence2.getDerniereValeur());
-        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
+        SequenceEcritureComptable sequenceModifiee = comptabiliteDao.getSequenceEcritureComptable("AC", 2019);
+        assertEquals("La mise à jour a échoué", sequenceModifiee.getDerniereValeur(), sequence2.getDerniereValeur());
+        comptabiliteDao.deleteSequenceEcritureComptable("AC", 2019);
     }
 }
