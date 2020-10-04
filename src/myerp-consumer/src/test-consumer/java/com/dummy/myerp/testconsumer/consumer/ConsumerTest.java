@@ -253,10 +253,8 @@ public class ConsumerTest extends ConsumerTestCase {
     }
 
     /**
-     * Vérification du chargement de la liste des lignes d'écriture dans une écriture.
-     * Test passant.
-     *
-     * Le test vérifie que la ligne d'écriture présente est bien remplacé par la liste chargé.
+     * Test de chargement de la liste des lignes d'écriture dans une écriture.
+     * Le test vérifie que la ligne d'écriture présente est remplacé par la liste chargé.
      * - id = -4
      * - code journal = VE
      * - reference = VE-2016/00004
@@ -268,41 +266,41 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
-    public void loadListLigneEcritureTest() throws ParseException {
+    public void loadListLigneEcritureTest_checkListLigneEcritureComptableInEcritureComptable() throws ParseException {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2016/12/28 00:00:00");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2016/12/28 00:00:00");
 
-        JournalComptable journal = new JournalComptable("VE", "Vente");
+        JournalComptable journalComptable = new JournalComptable("VE", "Vente");
 
-        CompteComptable compte = new CompteComptable(999);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(100), null);
+        CompteComptable compteComptable = new CompteComptable(999);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(100), null);
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
+        listLigneEcriture.add(ligneEcritureComptable);
 
-        EcritureComptable ecriture = createEcritureComptable(-4, journal, "VE-2016/00004", date,"TMA Appli Yyy", listLigneEcriture );
+        EcritureComptable ecritureComptable = createEcritureComptable(-4, journalComptable, "VE-2016/00004", date,"TMA Appli Yyy", listLigneEcriture );
 
-        comptabiliteDao.loadListLigneEcriture(ecriture);
+        comptabiliteDao.loadListLigneEcriture(ecritureComptable);
 
-        boolean testOk = false;
-        if(ecriture.getId() == -4 &&
-        StringUtils.equals(ecriture.getJournal().getCode(), "VE") &&
-        StringUtils.equals(ecriture.getReference(), "VE-2016/00004") &&
-        StringUtils.equals(ecriture.getLibelle(), "TMA Appli Yyy") &&
-        ecriture.getDate().compareTo(date) == 0 &&
-        ecriture.getListLigneEcriture().size() == 3 &&
-        ecriture.getListLigneEcriture().get(0).getCompteComptable().getNumero() != 999 &&
-        ecriture.getListLigneEcriture().get(1).getCompteComptable().getNumero() == 706 &&
-        StringUtils.equals(ecriture.getListLigneEcriture().get(1).getLibelle(), "TMA Appli Xxx"))
+        boolean testCheck = false;
+        if(ecritureComptable.getId() == -4 &&
+        StringUtils.equals(ecritureComptable.getJournal().getCode(), "VE") &&
+        StringUtils.equals(ecritureComptable.getReference(), "VE-2016/00004") &&
+        StringUtils.equals(ecritureComptable.getLibelle(), "TMA Appli Yyy") &&
+        ecritureComptable.getDate().compareTo(date) == 0 &&
+        ecritureComptable.getListLigneEcriture().size() == 3 &&
+        ecritureComptable.getListLigneEcriture().get(0).getCompteComptable().getNumero() != 999 &&
+        ecritureComptable.getListLigneEcriture().get(1).getCompteComptable().getNumero() == 706 &&
+        StringUtils.equals(ecritureComptable.getListLigneEcriture().get(1).getLibelle(), "TMA Appli Xxx"))
         {
-            testOk = true;
+            testCheck = true;
         }
-        assertTrue("Le chargement des lignes d'écritures ne s'est pas fait correctement", testOk);
+        assertTrue("Le chargement des lignes d'écritures ne s'est pas fait correctement", testCheck);
     }
 
     /**
-     * Vérification de l'insertion d'une écriture comptable
-     * Test passant
+     * Test d'insertion d'une écriture comptable
+     * puis récupération par l'id pour vérification
      * - id = non connu
      * - Journal : premier la liste (
      * - reference = ZZ-2018/00001
@@ -313,42 +311,43 @@ public class ConsumerTest extends ConsumerTestCase {
      * - Libellé première écriture : Ligne1
      * - Libellé seconde écriture : Ligne2
      *
+     * puis suppresion de l'insertion
      */
     @Test
-    public void insertEcritureComptableTest() throws ParseException {
+    public void insertEcritureComptableTest_checkbyGetId() throws ParseException {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2018/12/19 00:00:00");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journal = comptabiliteDao.getListJournalComptable().get(0);
+        JournalComptable journalComptable = comptabiliteDao.getListJournalComptable().get(0);
 
-        CompteComptable compte = comptabiliteDao.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
+        CompteComptable compteComptable = comptabiliteDao.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        listLigneEcriture.add(ligneEcritureComptable);
+        listLigneEcriture.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journal, "ZZ-2018/00001", date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "ZZ-2018/00001", date, "ecriture insérée", listLigneEcriture);
         comptabiliteDao.insertEcritureComptable(ecritureComptable);
-        boolean testOk = false;
+        boolean testCheck = false;
         try {
-            EcritureComptable ecritureInseree = comptabiliteDao.getEcritureComptable(ecritureComptable.getId());
-            if( ecritureInseree.getId().equals(ecritureComptable.getId()) &&
-                ecritureInseree.getDate().compareTo(ecritureComptable.getDate()) == 0 &&
-                StringUtils.equals(ecritureInseree.getJournal().getCode(), ecritureComptable.getJournal().getCode()) &&
-                StringUtils.equals(ecritureInseree.getLibelle(), ecritureComptable.getLibelle()) &&
-                StringUtils.equals(ecritureInseree.getReference(), ecritureComptable.getReference()) &&
-                ecritureInseree.getListLigneEcriture().size() == ecritureComptable.getListLigneEcriture().size() &&
-                StringUtils.equals(ecritureInseree.getListLigneEcriture().get(0).getLibelle(), ecritureComptable.getListLigneEcriture().get(0).getLibelle()) &&
-                StringUtils.equals(ecritureInseree.getListLigneEcriture().get(1).getLibelle(), ecritureComptable.getListLigneEcriture().get(1).getLibelle())) {
+            EcritureComptable ecritureComptableInseree = comptabiliteDao.getEcritureComptable(ecritureComptable.getId());
+            if( ecritureComptableInseree.getId().equals(ecritureComptable.getId()) &&
+                ecritureComptableInseree.getDate().compareTo(ecritureComptable.getDate()) == 0 &&
+                StringUtils.equals(ecritureComptableInseree.getJournal().getCode(), ecritureComptable.getJournal().getCode()) &&
+                StringUtils.equals(ecritureComptableInseree.getLibelle(), ecritureComptable.getLibelle()) &&
+                StringUtils.equals(ecritureComptableInseree.getReference(), ecritureComptable.getReference()) &&
+                ecritureComptableInseree.getListLigneEcriture().size() == ecritureComptable.getListLigneEcriture().size() &&
+                StringUtils.equals(ecritureComptableInseree.getListLigneEcriture().get(0).getLibelle(), ecritureComptable.getListLigneEcriture().get(0).getLibelle()) &&
+                StringUtils.equals(ecritureComptableInseree.getListLigneEcriture().get(1).getLibelle(), ecritureComptable.getListLigneEcriture().get(1).getLibelle())) {
 
-                testOk = true;
+                testCheck = true;
             }
         } catch (NotFoundException e) {
             fail();
         }
-        assertTrue("L'insertion de l'écriture comptable ne s'est pas faite correctement", testOk);
+        assertTrue("L'insertion de l'écriture comptable a échoué", testCheck);
         comptabiliteDao.deleteEcritureComptable(ecritureComptable.getId());
     }
 
