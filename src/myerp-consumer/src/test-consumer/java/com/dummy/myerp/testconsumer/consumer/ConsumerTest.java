@@ -150,7 +150,7 @@ public class ConsumerTest extends ConsumerTestCase {
 //                break;
 //            }
 //        }
-        assertTrue("L'écriture comptabel d'ID -5, de code journal BQ, de référence BQ-2016/00005, de date 2016/12/27 00:00:00 et de libellé Paiement Facture C110002 n'existe pas ou n'est pas le premier élèment de la liste", testCheck);
+        assertTrue("L'écriture comptable d'ID -5, de code journal BQ, de référence BQ-2016/00005, de date 2016/12/27 00:00:00 et de libellé Paiement Facture C110002 n'existe pas ou n'est pas le premier élèment de la liste", testCheck);
     }
 
     /**
@@ -166,7 +166,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * - Libellé de la ligne écriture 2 = TMA Appli Xxx
      */
     @Test
-    public void getEcritureComptableTest() throws ParseException {
+    public void getEcritureComptableTest_checkEcritureComptable() throws ParseException {
         EcritureComptable ecritureComptable = new EcritureComptable();
         try {
             ecritureComptable = comptabiliteDao.getEcritureComptable(-4);
@@ -188,18 +188,18 @@ public class ConsumerTest extends ConsumerTestCase {
         {
             testCheck = true;
         }
-        assertTrue("L'écriture comptabel d'ID -4, de code journal VE, de référence VE-2016/00004, de date 2016/12/28 00:00:00 et de libellé TMA Appli Yyy n'a pas été récupéré correctement", testCheck);
+        assertTrue("L'écriture comptable d'ID -4, de code journal VE, de référence VE-2016/00004, de date 2016/12/28 00:00:00 et de libellé TMA Appli Yyy n'a pas été récupéré correctement", testCheck);
     }
 
     /**
-     * Vérification récupération d'une écriture comptable qui n'existe pas par son id.
+     * Test de récupération d'une écriture comptable inexistant par son id.
      * Doit renvoyer une exception NotFoundException
      *
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void getEcritureComptableTestNotFound() throws NotFoundException {
-        comptabiliteDao.getEcritureComptable(99);
+    public void getEcritureComptableTest_throwNotFoundException() throws NotFoundException {
+        comptabiliteDao.getEcritureComptable(659);
     }
 
     /**
