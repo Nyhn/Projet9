@@ -99,7 +99,7 @@ public class ConsumerTest extends ConsumerTestCase {
     /**
      * Test de récupération de la liste des écritures comptables
      * Vérification que la taille de liste est égale à 5
-     * et que la première écriture comptable vaut :
+     * et que la dernière écriture comptable vaut :
      * - id = -5
      * - code journal = BQ
      * - reference = BQ-2016/00005
@@ -111,7 +111,7 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
-    public void getListEcritureComptableTest_checkFirstEcritureComptableAndSizeListEqual5() throws ParseException {
+    public void getListEcritureComptableTest_checkLastEcritureComptableAndSizeListEqual5() throws ParseException {
         List<EcritureComptable> listEcritureComptable = comptabiliteDao.getListEcritureComptable();
 
         assertTrue("La liste des écritures n'est pas égale à 5", listEcritureComptable.size() == 5);
@@ -119,18 +119,17 @@ public class ConsumerTest extends ConsumerTestCase {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2016/12/27 00:00:00");
         boolean testCheck = false;
-        if(listEcritureComptable.get(0).getId() == -5 &&
-                StringUtils.equals(listEcritureComptable.get(0).getJournal().getCode(), "BQ") &&
-                StringUtils.equals(listEcritureComptable.get(0).getReference(), "BQ-2016/00005") &&
-                StringUtils.equals(listEcritureComptable.get(0).getLibelle(), "Paiement Facture C110002") &&
-                listEcritureComptable.get(0).getDate().compareTo(date) == 0 &&
-                listEcritureComptable.get(0).getListLigneEcriture().size() == 2 &&
-                listEcritureComptable.get(0).getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
-                listEcritureComptable.get(0).getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
+        if(listEcritureComptable.get(4).getId() == -5 &&
+                StringUtils.equals(listEcritureComptable.get(4).getJournal().getCode(), "BQ") &&
+                StringUtils.equals(listEcritureComptable.get(4).getReference(), "BQ-2016/00005") &&
+                StringUtils.equals(listEcritureComptable.get(4).getLibelle(), "Paiement Facture C110002") &&
+                listEcritureComptable.get(4).getDate().compareTo(date) == 0 &&
+                listEcritureComptable.get(4).getListLigneEcriture().size() == 2 &&
+                listEcritureComptable.get(4).getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
+                listEcritureComptable.get(4).getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
         {
             testCheck = true;
         }
-
 
 
 //        Iterator iterator = listEcritureComptable.listIterator();
