@@ -1,5 +1,3 @@
-[![Coverage Status](https://coveralls.io/repos/github/BRUCELLA2/myerp_P9/badge.svg?branch=master)](https://coveralls.io/github/BRUCELLA2/myerp_P9?branch=master)
-
 # MyERP
 
 ## Organisation du répertoire
@@ -40,9 +38,22 @@ Il comporte :
     docker-compose stop
     docker-compose rm -v
     docker-compose up
+    
+## Travails effectués
+
+### Codes d'implementation ajoutés au projet
+
+* Couche Business, classe ComptabiliteManagerImpl, AddReference() : Ajoute une référence à l'écriture comptable. 
+* Couche Business, classe ComptabiliteManagerImpl, checkEcritureComptableUnit() : Vérifie la norme RG5 : Format et contenu de la référence.
+* 
 
 
-## Corrections apportés au projet initial
+### Tests rajoutés au projet 
+
+* Couche Business, Test unitaire, ComptabiliteMangerImpl,  
+
+
+### Corrections apportés au projet
 
 * Couche myerp-model, classe EcritureComptable, la méthode getTotalCredit() récupérait le débit de l'écriture comptable et non le crédit (@ANO #0001)
 * Couche myerp-model, classe EcritureComptable, dans la méthode isEquilibree(), la comparaison n'était pas faite correctement (utilisation d'equals() au lieu de compareTo()) (@ANO #0002)
