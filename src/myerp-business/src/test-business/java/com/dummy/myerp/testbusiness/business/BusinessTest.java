@@ -34,77 +34,70 @@ public class BusinessTest extends BusinessTestCase {
     }
 
     /**
-     * Vérification de la récupération de la liste des comptes comptables.
-     * Test passant.
-     * - 7 Comptes attendus
+     * Test de la récupération de la liste des comptes comptables.
      */
     @Test
-    public void getListCompteComptableTest() {
-        List<CompteComptable> listComptes = comptabiliteManager.getListCompteComptable();
-        assertEquals("Le nombre de compte attendu n'est pas correct",7, listComptes.size());
+    public void getListCompteComptableTest_sizeListEqual7() {
+        List<CompteComptable> listCompteComptable = comptabiliteManager.getListCompteComptable();
+        assertEquals("Le nombre de compte doit être égale à 7",7, listCompteComptable.size());
     }
 
     /**
-     * Vérification de la récupération de la liste des journaux comptables.
-     * Test passant.
-     * - 4 journaux attendus
+     * Test de la récupération de la liste des journaux comptables.
      */
     @Test
-    public void getListJournalComptableTest() {
+    public void getListJournalComptableTest_sizeListEqual4() {
         List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        assertEquals("Le nombre de journaux comptables attendu n'est pas correct", 4, listJournaux.size());
+        assertEquals("Le nombre de journaux comptables doit être égale à 4", 4, listJournaux.size());
     }
 
     /**
-     * Vérification de la récupération de la liste des écritures comptables.
-     * Test passant.
-     * - 5 écritures attendues
+     * Test de la récupération de la liste des écritures comptables.
      */
     @Test
-    public void getListEcritureComptableTest() {
+    public void getListEcritureComptableTest_sizeListEqual5() {
         List<EcritureComptable> listEcritures = comptabiliteManager.getListEcritureComptable();
-        assertEquals("Le nombre d'écritures comptables n'est pas correct", 5, listEcritures.size());
+        assertEquals("Le nombre d'écritures comptables doit être égale à 5", 5, listEcritures.size());
     }
 
     /**
-     * Vérification de l'insertion d'une écriture comptable
-     * Test passant.
-     * On créé une écriture, on l'insert dans la BDD.
-     * On récupère l'écriture insérée et on vérifie qu'elle correspond à l'écriture d'origine.
-     * L'écriture insérée est ensuite supprimée pour ne pas interferré avec d'autres tests.
+     * Test d'insertion d'une écriture comptable
+     * Création d'un écriture, puis insertion dans la BDD.
+     * Récupération de l'écriture insérée et vérification d'égalité avec l'écriture d'origine.
+     * Puis suppression de l'écriture insérée
      */
     @Test
-    public void insertEcritureComptableTest() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2018/12/19 00:00:00");
+    public void insertEcritureComptableTest_checkEcritureComptable() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journalComptable1 = new JournalComptable();
+        JournalComptable journalComptable = new JournalComptable();
 
-        List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        for (JournalComptable journal : listJournaux) {
+        List<JournalComptable> listJournalComptable = comptabiliteManager.getListJournalComptable();
+        for (JournalComptable journal : listJournalComptable) {
             if (StringUtils.equals(journal.getCode(), "AC")) {
-                journalComptable1 = journal;
+                journalComptable = journal;
             }
         }
 
-        CompteComptable compte = comptabiliteManager.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
-        List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
+        List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
+        ligneEcritureComptableList.add(ligneEcritureComptable);
+        ligneEcritureComptableList.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable1, "AC-2018/09999", date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2018/09999", date, "ecriture insérée", ligneEcritureComptableList);
 
         try {
             comptabiliteManager.insertEcritureComptable(ecritureComptable);
         } catch (FunctionalException e) {
-            fail("L'insertion de l'écriture n'a pu se faire : " + e.getMessage());
+            fail("Erreur de l'insertion : " + e.getMessage());
         }
 
-        List<EcritureComptable> listEcritures = comptabiliteManager.getListEcritureComptable();
-        Iterator it = listEcritures.listIterator();
-        boolean testOK = false;
+        List<EcritureComptable> listEcritureComptable = comptabiliteManager.getListEcritureComptable();
+        Iterator it = listEcritureComptable.listIterator();
+        boolean testCheck = false;
         while (it.hasNext()) {
             EcritureComptable ecritureInseree = (EcritureComptable) it.next();
             if(ecritureInseree.getId() != null &&
@@ -116,121 +109,116 @@ public class BusinessTest extends BusinessTestCase {
                 ecritureInseree.getListLigneEcriture().get(1).getCompteComptable().getNumero().equals(ecritureComptable.getListLigneEcriture().get(1).getCompteComptable().getNumero()) &&
                 ecritureInseree.getListLigneEcriture().get(1).getCredit().compareTo(ecritureComptable.getListLigneEcriture().get(1).getCredit()) == 0)
             {
-                testOK = true;
+                testCheck = true;
             }
         }
-       assertTrue("Les informations de l'écriture insérée ne correspondent pas à l'écriture d'origine", testOK);
+       assertTrue("Les données de l'écriture insérée n'est pas égales à l'écriture d'origine", testCheck);
         comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
     }
 
     /**
-     * Vérification de l'insertion d'une écriture ne respectant pas les règles de gestion.
-     * L'écriture doit être vérifiée avec insertion
-     * Doit renvoyer une Fonctional Exception
-     *
+     * Test d'insertion d'une écriture ne respectant pas les règles de gestion.
+     * vérification de l'écriture avant insertion
      * @throws FunctionalException
      */
     @Test (expected = FunctionalException.class)
-    public void insertEcritureComptableIncorrectTest() throws FunctionalException {
+    public void insertEcritureComptable_throwFunctionalException() throws FunctionalException {
         EcritureComptable ecritureComptable = new EcritureComptable();
-
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
     }
 
     /**
-     *  Vérification de l'ajout d'une référence à une écriture comptable.
-     *  Test passant.
-     *  On vérifie qu'une référence a bien été ajouté à l'écriture
-     *  On vérifie ensuite que l'écriture respecte les règles de gestion.
-     *  L'écriture insérée est ensuite supprimée pour ne pas interferré avec d'autres tests.
+     *  Test d'ajout d'une référence à une écriture comptable.
+     *  Puis vérification que la référence a bien été ajouté à l'écriture
+     *  Vérification que l'écriture respecte les règles de gestion.
+     *  Suppression de l'écriture insérée
      */
     @Test
-    public void addReferenceTest() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2020/09/18 00:00:00");
+    public void addReferenceTest_checkAdd() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
         JournalComptable journalComptable = new JournalComptable();
 
-        List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        for (JournalComptable journal : listJournaux) {
+        List<JournalComptable> listJournalComptable = comptabiliteManager.getListJournalComptable();
+        for (JournalComptable journal : listJournalComptable) {
             if (StringUtils.equals(journal.getCode(), "AC")) {
                 journalComptable = journal;
             }
         }
 
-        CompteComptable compte = comptabiliteManager.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne 1", BigDecimal.valueOf(200), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne 2", null, BigDecimal.valueOf(200));
-        List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne 1", BigDecimal.valueOf(200), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne 2", null, BigDecimal.valueOf(200));
+        List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
+        ligneEcritureComptableList.add(ligneEcritureComptable);
+        ligneEcritureComptableList.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, null, date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, null, date, "ecriture insérée", ligneEcritureComptableList);
         comptabiliteManager.addReference(ecritureComptable);
 
         assertNotEquals("Erreur d'insertion de la référence", null, ecritureComptable.getReference());
         try {
             comptabiliteManager.checkEcritureComptable(ecritureComptable);
         } catch (FunctionalException e) {
-            fail("Les règles de gestion ne sont pas respecté");
+            fail("Erreur avec les règles de gestion");
         }
         comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
     }
 
     /**
-     * Vérification de la mise à jour d'une écriture comptable.
-     * Test passant.
-     * On insert une écriture, on demande sa modification.
-     * On vérifie ensuite si parmi la liste des écritures, une écriture contient bien les modifications de l'écriture
-     * L'écriture insérée est ensuite supprimée pour ne pas interferré avec d'autres tests.
+     * Test de mise à jour d'une écriture comptable.
+     * Insertion d'une écriture, puis modification.
+     * Vérification de la modification dans la bdd
+     * suppression de l'écriture insérée
      */
     @Test
-    public void updateEcritureComptableTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2020/09/18 00:00:00");
+    public void updateEcritureComptableTest_checkEcritureComptable() throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
+        JournalComptable journalComptable = new JournalComptable();
         JournalComptable journalComptable1 = new JournalComptable();
-        JournalComptable journalComptable2 = new JournalComptable();
 
-        List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        for (JournalComptable journal : listJournaux) {
+        List<JournalComptable> listJournalComptable = comptabiliteManager.getListJournalComptable();
+        for (JournalComptable journal : listJournalComptable) {
             if (StringUtils.equals(journal.getCode(), "AC")) {
-                journalComptable1 = journal;
+                journalComptable = journal;
             }
             if (StringUtils.equals(journal.getCode(), "BQ")) {
-                journalComptable2 = journal;
+                journalComptable1 = journal;
             }
         }
 
-        CompteComptable compte = comptabiliteManager.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne 1", BigDecimal.valueOf(200), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne 2", null, BigDecimal.valueOf(200));
+        CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne 1", BigDecimal.valueOf(200), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne 2", null, BigDecimal.valueOf(200));
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        listLigneEcriture.add(ligneEcritureComptable);
+        listLigneEcriture.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable1, "AC-2020/09999", date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2020/09999", date, "ecriture insérée", listLigneEcriture);
 
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
 
-        Date date2 = dateFormat.parse("2020/09/18 00:00:00");
-        JournalComptable journal2 = comptabiliteManager.getListJournalComptable().get(1);
+        Date date1 = simpleDateFormat.parse("2020/09/18 00:00:00");
+        JournalComptable journalComptable2 = comptabiliteManager.getListJournalComptable().get(1);
 
-        LigneEcritureComptable ligneEcriture3 = new LigneEcritureComptable(compte, "Ligne 3", BigDecimal.valueOf(500), null);
-        LigneEcritureComptable ligneEcriture4 = new LigneEcritureComptable(compte, "Lign e4", null, BigDecimal.valueOf(500));
+        LigneEcritureComptable ligneEcritureComptable2 = new LigneEcritureComptable(compteComptable, "Ligne 3", BigDecimal.valueOf(500), null);
+        LigneEcritureComptable ligneEcritureComptable3 = new LigneEcritureComptable(compteComptable, "Ligne 4", null, BigDecimal.valueOf(500));
         List<LigneEcritureComptable> listLigneEcriture2 = new ArrayList<>();
-        listLigneEcriture2.add(ligneEcriture3);
-        listLigneEcriture2.add(ligneEcriture4);
+        listLigneEcriture2.add(ligneEcritureComptable2);
+        listLigneEcriture2.add(ligneEcritureComptable3);
 
-        EcritureComptable ecritureComptableModifiee = createEcritureComptable(ecritureComptable.getId(), journalComptable2, "BQ-2020/10000", date2, "ecriture modifié", listLigneEcriture2);
+        EcritureComptable ecritureComptableModifiee = createEcritureComptable(ecritureComptable.getId(), journalComptable1, "BQ-2020/10000", date1, "ecriture modifié", listLigneEcriture2);
         comptabiliteManager.updateEcritureComptable(ecritureComptableModifiee);
 
-        List<EcritureComptable> listEcritures = comptabiliteManager.getListEcritureComptable();
-        Iterator it = listEcritures.listIterator();
-        boolean testOk = false;
+        List<EcritureComptable> listEcritureComptable = comptabiliteManager.getListEcritureComptable();
+        Iterator iterator = listEcritureComptable.listIterator();
+        boolean testCheck = false;
 
-        while (it.hasNext()) {
-            EcritureComptable ecriture = (EcritureComptable) it.next();
+        while (iterator.hasNext()) {
+            EcritureComptable ecriture = (EcritureComptable) iterator.next();
             if (ecriture.getId().equals(ecritureComptableModifiee.getId()) &&
             ecriture.getDate().compareTo(ecritureComptableModifiee.getDate()) == 0 &&
             StringUtils.equals(ecriture.getJournal().getCode(), ecritureComptableModifiee.getJournal().getCode()) &&
@@ -239,193 +227,179 @@ public class BusinessTest extends BusinessTestCase {
             ecriture.getListLigneEcriture().size() == ecritureComptableModifiee.getListLigneEcriture().size() &&
             StringUtils.equals(ecriture.getListLigneEcriture().get(0).getLibelle(), ecritureComptableModifiee.getListLigneEcriture().get(0).getLibelle()) &&
             StringUtils.equals(ecriture.getListLigneEcriture().get(1).getLibelle(), ecritureComptableModifiee.getListLigneEcriture().get(1).getLibelle())) {
-                testOk = true;
+                testCheck = true;
             }
         }
-        assertTrue("La mise à jour de l'écriture comptable ne s'est pas faite correctement", testOk);
-
+        assertTrue("Erreur dans la mise à jour de l'écriture comptable", testCheck);
         comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
     }
 
     /**
-     * Vérification de la modification d'une écriture comptable.
-     * Ecriture incorrecte avec une liste de ligne d'écriture vide.
-     * Doit renvoyer une FunctionalException.
-     *
+     * Test de modification d'une écriture comptable.
+     * @throws Exception
      */
     @Test
-    public void updateEcritureComptableIncorrecteListTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2018/12/19 00:00:00");
+    public void updateEcritureComptableTest_incorrectList() throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journalComptable1 = new JournalComptable();
+        JournalComptable journalComptable = new JournalComptable();
 
-        List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        for (JournalComptable journal : listJournaux) {
+        List<JournalComptable> listJournalComptable = comptabiliteManager.getListJournalComptable();
+        for (JournalComptable journal : listJournalComptable) {
             if (StringUtils.equals(journal.getCode(), "AC")) {
-                journalComptable1 = journal;
+                journalComptable = journal;
             }
         }
 
-        CompteComptable compte = comptabiliteManager.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
-        List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
+        List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
+        ligneEcritureComptableList.add(ligneEcritureComptable);
+        ligneEcritureComptableList.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable1, "AC-2018/09999", date, "ecriture insérée test update incorrect liste", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2018/09999", date, "ecriture insérée test update incorrect liste", ligneEcritureComptableList);
 
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
-        List<LigneEcritureComptable> listLigneEcriture2 = new ArrayList<>();
-        EcritureComptable ecritureInvalide = createEcritureComptable(ecritureComptable.getId(), journalComptable1, "AC-2018/09999", date, "ecriture modifié test update incorrect liste", listLigneEcriture2);
+        List<LigneEcritureComptable> ligneEcritureComptableList1 = new ArrayList<>();
+        EcritureComptable ecritureComptableInvalide = createEcritureComptable(ecritureComptable.getId(), journalComptable, "AC-2018/09999", date, "ecriture modifié test update incorrect liste", ligneEcritureComptableList1);
 
         try {
-            comptabiliteManager.updateEcritureComptable(ecritureInvalide);
+            comptabiliteManager.updateEcritureComptable(ecritureComptableInvalide);
             comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
-            fail("La vérification de l'écriture avec l'update n'a pas été faite correctement");
+            fail("Erreur dans la mise à jour de l'écriture comptable");
         } catch (FunctionalException e) {
             comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
         }
     }
 
     /**
-     * Vérification de la modification d'une écriture comptable.
-     * Ecriture incorrecte avec une référence vide.
-     * Doit renvoyer une FunctionalException.
-     *
+     * Test de modification d'une écriture comptable.
+     * @throws Exception
      */
     @Test
-    public void updateEcritureComptableIncorrecteRefTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2020/09/18 00:00:00");
+    public void updateEcritureComptableTest_IncorrectRef() throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
-        JournalComptable journalComptable1 = new JournalComptable();
+        JournalComptable journalComptable = new JournalComptable();
 
-        List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        for (JournalComptable journal : listJournaux) {
+        List<JournalComptable> listJournalComptable = comptabiliteManager.getListJournalComptable();
+        for (JournalComptable journal : listJournalComptable) {
             if (StringUtils.equals(journal.getCode(), "AC")) {
-                journalComptable1 = journal;
+                journalComptable = journal;
             }
         }
 
-        CompteComptable compte = comptabiliteManager.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne 1", BigDecimal.valueOf(500), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne 2", null, BigDecimal.valueOf(500));
-        List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne 1", BigDecimal.valueOf(500), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne 2", null, BigDecimal.valueOf(500));
+        List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
+        ligneEcritureComptableList.add(ligneEcritureComptable);
+        ligneEcritureComptableList.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable1, "AC-2020/09999", date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2020/09999", date, "ecriture insérée", ligneEcritureComptableList);
 
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
-        EcritureComptable ecritureInvalide = createEcritureComptable(ecritureComptable.getId(), journalComptable1, "", date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptableInvalide = createEcritureComptable(ecritureComptable.getId(), journalComptable, "", date, "ecriture insérée", ligneEcritureComptableList);
 
         try {
-            comptabiliteManager.updateEcritureComptable(ecritureInvalide);
+            comptabiliteManager.updateEcritureComptable(ecritureComptableInvalide);
             comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
-            fail("La vérification de l'écriture avec l'update n'a pas été faite correctement");
+            fail("Erreur dans la mise à jour de l'écriture comptable");
         } catch (FunctionalException e) {
             comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
         }
     }
 
     /**
-     * Vérification de la suppression d'une écriture comptable.
-     * Test passant.
-     * On créé une écriture comptable, on la supprime.
-     * On cherche si l'écriture existe toujours parmi la liste des écritures existantes.
-     *
+     * Test de suppression d'une écriture comptable.
+     * Création d'une écriture comptable, Puis suppression.
+     * Vérification de la suppression.
      */
     @Test
-    public void deleteEcritureComptableTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Date date = dateFormat.parse("2018/12/19 00:00:00");
+    public void deleteEcritureComptableTest_checkEcritureComtpable() throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
-        JournalComptable journalComptable1 = new JournalComptable();
+        JournalComptable journalComptable = new JournalComptable();
 
-        List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
-        for (JournalComptable journal : listJournaux) {
+        List<JournalComptable> listJournalComptable = comptabiliteManager.getListJournalComptable();
+        for (JournalComptable journal : listJournalComptable) {
             if (StringUtils.equals(journal.getCode(), "AC")) {
-                journalComptable1 = journal;
+                journalComptable = journal;
             }
         }
 
-        CompteComptable compte = comptabiliteManager.getListCompteComptable().get(0);
-        LigneEcritureComptable ligneEcriture = new LigneEcritureComptable(compte, "Ligne1", BigDecimal.valueOf(1500), null);
-        LigneEcritureComptable ligneEcriture2 = new LigneEcritureComptable(compte, "Ligne2", null, BigDecimal.valueOf(1500));
-        List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
-        listLigneEcriture.add(ligneEcriture);
-        listLigneEcriture.add(ligneEcriture2);
+        CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+        LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
+        LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
+        List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
+        ligneEcritureComptableList.add(ligneEcritureComptable);
+        ligneEcritureComptableList.add(ligneEcritureComptable1);
 
-        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable1, "AC-2018/09999", date, "ecriture insérée", listLigneEcriture);
+        EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2018/09999", date, "ecriture insérée", ligneEcritureComptableList);
 
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
 
         comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
 
-        List<EcritureComptable> listEcritures = comptabiliteManager.getListEcritureComptable();
-        for (EcritureComptable ecriture : listEcritures) {
+        List<EcritureComptable> listEcritureComptable = comptabiliteManager.getListEcritureComptable();
+        for (EcritureComptable ecriture : listEcritureComptable) {
             if (ecriture.getId().equals(ecritureComptable.getId())) {
-                fail("L'écriture n'a pas été supprimé correctement");
+                fail("Erreur de suppression de l'écriture comptable");
             }
         }
     }
 
     /**
-     * Vérification de l'insertion de la séquence d'écriture comptable.
-     * Test passant.
+     * Test d'insertion de la séquence d'écriture comptable.
      */
     @Test
-    public void insertSequenceEcritureComptableTest() {
+    public void insertSequenceEcritureComptableTest_checkSequenceEcritureComtpable() {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
 
         try {
-            SequenceEcritureComptable sequence = comptabiliteDao.getSequenceEcritureComptable(sequenceEcritureComptable.getJournalCode(), sequenceEcritureComptable.getAnnee());
+            SequenceEcritureComptable sequenceEcritureComptable1 = comptabiliteDao.getSequenceEcritureComptable(sequenceEcritureComptable.getJournalCode(), sequenceEcritureComptable.getAnnee());
         } catch (NotFoundException e) {
-            fail("La séquence de l'écriture comptable n'a pas été insérée correctement" + e.getMessage());
+            fail("Erreur d'insertion de la séquence d'écriture comptable" + e.getMessage());
         }
-
         comptabiliteDao.deleteSequenceEcritureComptable(sequenceEcritureComptable.getJournalCode(), sequenceEcritureComptable.getAnnee());
     }
 
     /**
-     * Vérification de la modification de la séquence d'écriture comptable.
-     * Test passant.
+     * Test de modification de la séquence d'écriture comptable.
      */
     @Test
-    public void updateSequenceEcritureComptableTest() {
+    public void updateSequenceEcritureComptableTest_checkSequenceEcritureComptable() {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
         SequenceEcritureComptable sequenceEcritureComptableModifiee = new SequenceEcritureComptable("OD", 2020, 50);
         comptabiliteManager.updateSequenceEcritureComptable(sequenceEcritureComptableModifiee);
 
         try {
-            SequenceEcritureComptable sequence = comptabiliteDao.getSequenceEcritureComptable(sequenceEcritureComptableModifiee.getJournalCode(), sequenceEcritureComptableModifiee.getAnnee());
-            if(sequence.getDerniereValeur() != 50){
-                fail("La séquence n'a été que partiellement modifiée : " + sequence.getDerniereValeur());
+            SequenceEcritureComptable sequenceEcritureComptable1 = comptabiliteDao.getSequenceEcritureComptable(sequenceEcritureComptableModifiee.getJournalCode(), sequenceEcritureComptableModifiee.getAnnee());
+            if(sequenceEcritureComptable1.getDerniereValeur() != 50){
+                fail("Modification partielle de la séquence d'écriture comptable : " + sequenceEcritureComptable1.getDerniereValeur());
             }
         } catch (NotFoundException e) {
-            fail("La séquence de l'écriture comptable n'a pas été modifiée correctement" + e.getMessage());
+            fail("Erreur de modification de la séquence d'écriture comptable : " + e.getMessage());
         }
-
         comptabiliteDao.deleteSequenceEcritureComptable(sequenceEcritureComptableModifiee.getJournalCode(), sequenceEcritureComptableModifiee.getAnnee());
     }
 
     /**
-     * Vérification de la suppression d'une séquence d'écriture comptable.
-     * Test passant
-     * On insert une séquence, on la supprime et on la recherche en BDD.
-     * Doit renvoyer une NotFoundException
+     * Test de suppression d'une séquence d'écriture comptable.
+     * Insertion d'une séquence, Puis suppression et on la recherche en BDD.
+     * @throws Exception
      */
     @Test (expected = NotFoundException.class)
-    public void deleteSequenceEcritureComptableTest() throws Exception {
+    public void deleteSequenceEcritureComptableTest_checkSequenceEcritureComptable() throws Exception {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
-
         comptabiliteManager.deleteSequenceEcritureComptable(sequenceEcritureComptable);
-
         comptabiliteDao.getSequenceEcritureComptable(sequenceEcritureComptable.getJournalCode(), sequenceEcritureComptable.getAnnee());
     }
 }

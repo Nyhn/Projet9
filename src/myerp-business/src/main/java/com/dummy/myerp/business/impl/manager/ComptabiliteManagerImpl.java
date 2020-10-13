@@ -3,7 +3,6 @@ package com.dummy.myerp.business.impl.manager;
 import java.math.BigDecimal;
 import java.time.Year;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -32,8 +31,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     public ComptabiliteManagerImpl() {
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(ComptabiliteManagerImpl.class);
-    
     @Override
     public List<CompteComptable> getListCompteComptable() {
         return getDaoProxy().getComptabiliteDao().getListCompteComptable();
@@ -57,25 +54,16 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      */
     @Override
     public synchronized void addReference(EcritureComptable pEcritureComptable) {
-        // Bien se réferer à la JavaDoc de cette méthode !
-        /* Le principe :
-                1.  Remonter depuis la persitance la dernière valeur de la séquence du journal pour l'année de l'écriture
-                    (table sequence_ecriture_comptable)
-                2.  * S'il n'y a aucun enregistrement pour le journal pour l'année concernée :
-                        1. Utiliser le numéro 1.
-                    * Sinon :
-                        1. Utiliser la dernière valeur + 1
-                3.  Mettre à jour la référence de l'écriture avec la référence calculée (RG_Compta_5)
-                4.  Enregistrer (insert/update) la valeur de la séquence en persitance
-                    (table sequence_ecriture_comptable)
-         */
         int annee = Year.now().getValue();
         String journalCode = pEcritureComptable.getJournal().getCode();
         StringBuilder reference = new StringBuilder();
 
         try{
+            // Remonter depuis la persitance la dernière valeur de la séquence du journal pour l'année de l'écriture (table sequence_ecriture_comptable)
             SequenceEcritureComptable sequenceEcritureComptable = getDaoProxy().getComptabiliteDao().getSequenceEcritureComptable(journalCode,annee);
+            // Utiliser la dernière valeur + 1
             sequenceEcritureComptable.setDerniereValeur(sequenceEcritureComptable.getDerniereValeur() + 1);
+            // Mettre à jour la référence de l'écriture avec la référence calculée (RG_Compta_5)
             reference.append(journalCode)
                     .append("-")
                     .append(annee)
@@ -84,16 +72,18 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
             pEcritureComptable.setReference(reference.toString());
             updateSequenceEcritureComptable(sequenceEcritureComptable);
         }catch (NotFoundException e){
+            // S'il n'y a aucun enregistrement pour le journal pour l'année concernée : Utiliser le numéro 1
             SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(journalCode,annee,1);
+            // Mettre à jour la référence de l'écriture avec la référence calculée (RG_Compta_5)
             reference.append(journalCode)
                     .append("-")
                     .append(annee)
                     .append("/")
                     .append(StringUtils.leftPad(String.valueOf(1),5,"0"));
             pEcritureComptable.setReference(reference.toString());
+            // Enregistrer (insert/update) la valeur de la séquence en persitance (table sequence_ecriture_comptable)
             insertSequenceEcritureComptable(sequenceEcritureComptable);
         }
-
     }
 
     /**
@@ -147,16 +137,15 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         if (pEcritureComptable.getListLigneEcriture().size() < 2
             || vNbrCredit < 1
             || vNbrDebit < 1) {
-            System.out.println("nb crédit / débit");
-            throw new FunctionalException(
-                "L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
-        }
-        // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...
+                throw new FunctionalException(
+                    "L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
+            }
+        // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal
 
         String reference = pEcritureComptable.getReference();
         final String regexp = "\\w{2}-\\d{4}/\\d{5}";
         if(!reference.matches(regexp))
-            throw new FunctionalException("La référence ne suit pas le bon pattern XX-AAAA/#####");
+            throw new FunctionalException("La référence n'a pas le bon pattern XX-AAAA/#####");
         int annee = Integer.parseInt(StringUtils.substringBetween(reference,"-","/"));
         if(pEcritureComptable.getDate().toInstant().atZone(ZoneId.systemDefault()).getYear() != annee)
             throw new FunctionalException("L'annee de la référence n'est pas égale");
