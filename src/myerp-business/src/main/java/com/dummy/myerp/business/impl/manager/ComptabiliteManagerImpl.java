@@ -140,7 +140,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                 throw new FunctionalException(
                     "L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
             }
-        // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal
+        // ===== RG_Compta_5 : vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal
 
         String reference = pEcritureComptable.getReference();
         final String regexp = "\\w{2}-\\d{4}/\\d{5}";

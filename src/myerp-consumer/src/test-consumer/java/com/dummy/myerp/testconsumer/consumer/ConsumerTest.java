@@ -48,7 +48,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * et que le premier élèment de la liste est égale au numéro "401" et au libellé "Fournisseurs"
      */
     @Test
-    public void getListCompteComptableTest_checkFirstCompteComptableAndSizeListEqual7() {
+    public void getListCompteComptableTest_listCompteComptable_checkFirstCompteComptableAndSizeListEqual7() {
         List<CompteComptable> listCompteComptable = comptabiliteDao.getListCompteComptable();
 
         assertTrue("La liste des comptes est différent de 7", listCompteComptable.size() == 7 );
@@ -66,7 +66,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * et que le premier élèment de la liste est égale au code "AC" et au libellé "Achat"
      */
     @Test
-    public void getListJournalComptableTest_checkFirstJournalComptableAndSIzeListEqual4() {
+    public void getListJournalComptableTest_listJournalComptable_checkFirstJournalComptableAndSIzeListEqual4() {
         List<JournalComptable> listJournalComptable = comptabiliteDao.getListJournalComptable();
         
         assertTrue("La liste des journaux est différent de 4", listJournalComptable.size() == 4);
@@ -93,7 +93,7 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
-    public void getListEcritureComptableTest_checkFirstEcritureComptableAndSizeListEqual5() throws ParseException {
+    public void getListEcritureComptableTest_listEcritureComtable_checkFirstEcritureComptableAndSizeListEqual5() throws ParseException {
         List<EcritureComptable> listEcritureComptable = comptabiliteDao.getListEcritureComptable();
 
         assertTrue("La liste des écritures n'est pas égale à 5", listEcritureComptable.size() == 5);
@@ -128,7 +128,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * - Libellé de la ligne écriture 2 = TMA Appli Xxx
      */
     @Test
-    public void getEcritureComptableTest_checkEcritureComptable() throws ParseException {
+    public void getEcritureComptableTest_EcritureComptable_checkEcritureComptable() throws ParseException {
         EcritureComptable ecritureComptable = new EcritureComptable();
         try {
             ecritureComptable = comptabiliteDao.getEcritureComptable(-4);
@@ -160,7 +160,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void getEcritureComptableTest_throwNotFoundException() throws NotFoundException {
+    public void getEcritureComptableTest_EcritureComptable_throwNotFoundException() throws NotFoundException {
         comptabiliteDao.getEcritureComptable(659);
     }
 
@@ -178,7 +178,7 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
-    public void getEcritureComptableByRefTest_checkEcritureComptable() throws ParseException {
+    public void getEcritureComptableByRefTest_EcritureComptable_checkEcritureComptable() throws ParseException {
         EcritureComptable ecritureComptable = new EcritureComptable();
         try {
             ecritureComptable = comptabiliteDao.getEcritureComptableByRef("VE-2016/00004");
@@ -210,7 +210,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void getEcritureComptableByRefTest_throwNotFoundException() throws NotFoundException {
+    public void getEcritureComptableByRefTest_EcritureComptable_throwNotFoundException() throws NotFoundException {
         comptabiliteDao.getEcritureComptableByRef("ZZ-2018/90004");
     }
 
@@ -228,7 +228,7 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
-    public void loadListLigneEcritureTest_checkListLigneEcritureComptableInEcritureComptable() throws ParseException {
+    public void loadListLigneEcritureTest_NoReturn_checkListLigneEcritureComptableInEcritureComptable() throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2016/12/28 00:00:00");
@@ -276,7 +276,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * puis suppresion de l'insertion
      */
     @Test
-    public void insertEcritureComptableTest_checkbyGetId() throws ParseException {
+    public void insertEcritureComptableTest_NoReturn_checkbyGetId() throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
@@ -318,7 +318,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * puis vérification de la mise à jour
      */
     @Test
-    public void updateEcritureComptableTest_checkEcritureComptable() throws ParseException {
+    public void updateEcritureComptableTest_NoReturn_checkEcritureComptable() throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -371,7 +371,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * Vérification de la suppression d'une écriture comptable.
      */
     @Test
-    public void deleteEcritureComptableTest_checkEcritureComptableNotFound() throws ParseException {
+    public void deleteEcritureComptableTest_NoReturn_checkEcritureComptableNotFound() throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -405,7 +405,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * dernière valeur : 40
      */
     @Test
-    public void getSequenceEcritureComptableTest_withJournalCodeAndAnnee_checkDerniereValeur() throws NotFoundException {
+    public void getSequenceEcritureComptableTest_SequenceEcritureComptable_withJournalCodeAndAnnee_checkDerniereValeur() throws NotFoundException {
         SequenceEcritureComptable sequenceEcritureComptable = comptabiliteDao.getSequenceEcritureComptable("AC", 2016);
 
         assertEquals("La séquence d'écriture comptable n'existe pas", sequenceEcritureComptable.getDerniereValeur(), Integer.valueOf(40));
@@ -418,7 +418,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void getSequenceEcritureComptableTest_throwNotFoundException() throws NotFoundException {
+    public void getSequenceEcritureComptableTest_SequenceEcritureComptable_throwNotFoundException() throws NotFoundException {
         comptabiliteDao.getSequenceEcritureComptable("UK", 2020);
     }
 
@@ -429,7 +429,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * @throws NotFoundException
      */
     @Test(expected = NotFoundException.class)
-    public void deleteSequenceEcritureComptableTest_ThrowNotFoundException() throws NotFoundException {
+    public void deleteSequenceEcritureComptableTest_NoReturn_ThrowNotFoundException() throws NotFoundException {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("AC", 2055, 555);
         comptabiliteDao.insertSequenceEcritureComptable(sequenceEcritureComptable);
         comptabiliteDao.deleteSequenceEcritureComptable("AC", 2055);
@@ -440,7 +440,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * Test d'insertion d'une séquence d'écriture comptable
      */
     @Test
-    public void insertSequenceEcritureComptableTest() throws NotFoundException {
+    public void insertSequenceEcritureComptableTest_NoReturn() throws NotFoundException {
 
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("AC", 2019, 15);
         comptabiliteDao.insertSequenceEcritureComptable(sequenceEcritureComptable);
@@ -456,7 +456,7 @@ public class ConsumerTest extends ConsumerTestCase {
      * @throws NotFoundException
      */
     @Test
-    public void updateSequenceEcritureComptableTest() throws NotFoundException {
+    public void updateSequenceEcritureComptableTest_NoReturn() throws NotFoundException {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("AC", 2019, 15);
         comptabiliteDao.insertSequenceEcritureComptable(sequenceEcritureComptable);
 

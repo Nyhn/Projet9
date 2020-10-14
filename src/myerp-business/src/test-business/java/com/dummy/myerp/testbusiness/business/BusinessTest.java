@@ -37,7 +37,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test de la récupération de la liste des comptes comptables.
      */
     @Test
-    public void getListCompteComptableTest_sizeListEqual7() {
+    public void getListCompteComptableTest_listCompteComptable_sizeListEqual7() {
         List<CompteComptable> listCompteComptable = comptabiliteManager.getListCompteComptable();
         assertEquals("Le nombre de compte doit être égale à 7",7, listCompteComptable.size());
     }
@@ -46,7 +46,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test de la récupération de la liste des journaux comptables.
      */
     @Test
-    public void getListJournalComptableTest_sizeListEqual4() {
+    public void getListJournalComptableTest_listJournalComptable_sizeListEqual4() {
         List<JournalComptable> listJournaux = comptabiliteManager.getListJournalComptable();
         assertEquals("Le nombre de journaux comptables doit être égale à 4", 4, listJournaux.size());
     }
@@ -55,7 +55,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test de la récupération de la liste des écritures comptables.
      */
     @Test
-    public void getListEcritureComptableTest_sizeListEqual5() {
+    public void getListEcritureComptableTest_listEcritureComptable_sizeListEqual5() {
         List<EcritureComptable> listEcritures = comptabiliteManager.getListEcritureComptable();
         assertEquals("Le nombre d'écritures comptables doit être égale à 5", 5, listEcritures.size());
     }
@@ -67,7 +67,7 @@ public class BusinessTest extends BusinessTestCase {
      * Puis suppression de l'écriture insérée
      */
     @Test
-    public void insertEcritureComptableTest_checkEcritureComptable() throws ParseException {
+    public void insertEcritureComptableTest_NoReturn_checkEcritureComptable() throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -122,7 +122,7 @@ public class BusinessTest extends BusinessTestCase {
      * @throws FunctionalException
      */
     @Test (expected = FunctionalException.class)
-    public void insertEcritureComptable_throwFunctionalException() throws FunctionalException {
+    public void insertEcritureComptable_NoReturn_throwFunctionalException() throws FunctionalException {
         EcritureComptable ecritureComptable = new EcritureComptable();
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
     }
@@ -134,7 +134,7 @@ public class BusinessTest extends BusinessTestCase {
      *  Suppression de l'écriture insérée
      */
     @Test
-    public void addReferenceTest_checkAdd() throws ParseException {
+    public void addReferenceTest_NoReturn_checkAdd() throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
@@ -173,7 +173,7 @@ public class BusinessTest extends BusinessTestCase {
      * suppression de l'écriture insérée
      */
     @Test
-    public void updateEcritureComptableTest_checkEcritureComptable() throws Exception {
+    public void updateEcritureComptableTest_NoReturn_checkEcritureComptable() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
@@ -239,7 +239,7 @@ public class BusinessTest extends BusinessTestCase {
      * @throws Exception
      */
     @Test
-    public void updateEcritureComptableTest_incorrectList() throws Exception {
+    public void updateEcritureComptableTest_NoReturn_incorrectList() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -279,7 +279,7 @@ public class BusinessTest extends BusinessTestCase {
      * @throws Exception
      */
     @Test
-    public void updateEcritureComptableTest_IncorrectRef() throws Exception {
+    public void updateEcritureComptableTest_NoReturn_IncorrectRef() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
@@ -319,7 +319,7 @@ public class BusinessTest extends BusinessTestCase {
      * Vérification de la suppression.
      */
     @Test
-    public void deleteEcritureComptableTest_checkEcritureComtpable() throws Exception {
+    public void deleteEcritureComptableTest_NoReturn_checkEcritureComtpable() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -357,7 +357,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test d'insertion de la séquence d'écriture comptable.
      */
     @Test
-    public void insertSequenceEcritureComptableTest_checkSequenceEcritureComtpable() {
+    public void insertSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComtpable() {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
 
@@ -373,7 +373,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test de modification de la séquence d'écriture comptable.
      */
     @Test
-    public void updateSequenceEcritureComptableTest_checkSequenceEcritureComptable() {
+    public void updateSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComptable() {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
         SequenceEcritureComptable sequenceEcritureComptableModifiee = new SequenceEcritureComptable("OD", 2020, 50);
@@ -396,7 +396,7 @@ public class BusinessTest extends BusinessTestCase {
      * @throws Exception
      */
     @Test (expected = NotFoundException.class)
-    public void deleteSequenceEcritureComptableTest_checkSequenceEcritureComptable() throws Exception {
+    public void deleteSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComptable() throws Exception {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
         comptabiliteManager.deleteSequenceEcritureComptable(sequenceEcritureComptable);
