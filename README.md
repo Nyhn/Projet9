@@ -39,21 +39,28 @@ Il comporte :
     docker-compose rm -v
     docker-compose up
     
-## Travails effectués
+## Travails effectués ( Date : 14/10/2020 )
 
-### Codes d'implementation ajoutés au projet
+### Codes d'implementation ajoutés au projet ( TODO )
 
-* Couche Business, classe ComptabiliteManagerImpl, AddReference() : Ajoute une référence à l'écriture comptable. 
-* Couche Business, classe ComptabiliteManagerImpl, checkEcritureComptableUnit() : Vérifie la norme RG5 : Format et contenu de la référence.
+* Couche Business, classe ComptabiliteManagerImpl, `AddReference()` : Ajoute une référence à l'écriture comptable. 
+* Couche Business, classe ComptabiliteManagerImpl, `checkEcritureComptableUnit()` : Vérifie la norme RG5 : Format et contenu de la référence.
 * 
 
+### Codes d'implementation secondaire ajoutés 
 
-### Tests rajoutés au projet 
+### Tests unitaire de classe Business rajoutés au projet 
 
-* Couche Business, Test unitaire, ComptabiliteMangerImpl,  
+* Couche Business, Test unitaire, ComptabiliteMangerImpl,
+
+### Tests d'intégration de classe Business rajoutés au projet 
+
+### Tests unitaire de classe model rajoutés au projet
+
+### Tests d'intégration de la classe consumer rajoutés au projet
 
 
-### Corrections apportés au projet
+### Erreurs corrigés du projet
 
 * Couche myerp-model, classe EcritureComptable, la méthode getTotalCredit() récupérait le débit de l'écriture comptable et non le crédit (@ANO #0001)
 * Couche myerp-model, classe EcritureComptable, dans la méthode isEquilibree(), la comparaison n'était pas faite correctement (utilisation d'equals() au lieu de compareTo()) (@ANO #0002)
