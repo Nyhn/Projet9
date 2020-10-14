@@ -249,10 +249,6 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     public void setSQLdeleteListLigneEcritureComptable(String pSQLdeleteListLigneEcritureComptable) {
         SQLdeleteListLigneEcritureComptable = pSQLdeleteListLigneEcritureComptable;
     }
-    /**
-     * Supprime les lignes d'écriture de l'écriture comptable d'id {@code pEcritureId}
-     * @param pEcritureId id de l'écriture comptable
-     */
     protected void deleteListLigneEcritureComptable(Integer pEcritureId) {
         NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource(DataSourcesEnum.MYERP));
         MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
@@ -262,6 +258,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
 
     // ==================== SequenceEcritureComptable - GET ===============
 
+    /** SQLgetSequenceEcritureComptable     */
     private static String SQLgetSequenceEcritureComptable;
     public void setSQLgetSequenceEcritureComptable(String pSQLgetSequenceEcritureComptable) {
         SQLgetSequenceEcritureComptable = pSQLgetSequenceEcritureComptable;
@@ -284,6 +281,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
 
     // ==================== SequenceEcritureComptable - INSERT ===============
 
+    /**  SQLinsertSequenceEcritureComptable */
     private static String SQLinsertSequenceEcritureComptable;
     public void setSQLinsertSequenceEcritureComptable(String pSQLinsertSequenceEcritureComptable) {
         SQLinsertSequenceEcritureComptable = pSQLinsertSequenceEcritureComptable;
@@ -300,7 +298,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     }
 
     // ==================== SequenceEcritureComptable - UPDATE ===============
-
+    /**  SQLupdateSequenceEcritureComptable */
     private static String SQLupdateSequenceEcritureComptable;
     public void setSQLupdateSequenceEcritureComptable(String pSQLupdateSequenceEcritureComptable) {
         SQLupdateSequenceEcritureComptable = pSQLupdateSequenceEcritureComptable;
@@ -318,6 +316,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
 
     // ==================== SequenceEcritureComptable - DELETE ===============
 
+    /** SQLdeleteSequenceEcritureComptable */
     private static String SQLdeleteSequenceEcritureComptable;
     public void setSQLdeleteSequenceEcritureComptable(String pSQLdeleteSequenceEcritureComptable) {
         SQLdeleteSequenceEcritureComptable = pSQLdeleteSequenceEcritureComptable;

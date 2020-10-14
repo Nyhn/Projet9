@@ -14,6 +14,9 @@ import java.util.List;
 
 public class JournalComptableTest {
 
+    /**
+     * Test les getters et les setters de la classe JournalComptable
+     */
     @Test
     public void validateSettersAndGetters() {
         final PojoClass JournalComptablePojo = PojoClassFactory.getPojoClass(JournalComptable.class);
@@ -24,6 +27,11 @@ public class JournalComptableTest {
         validator.validate(JournalComptablePojo);
     }
 
+
+    /**
+     * test de la fonction getByCode
+     * vérifie que la fonction récupère le bon journal dans une liste par rapport à son journalCode
+     */
     @Test
     public void getByCode_returnJournalComptable_listJournalComptableAndCode(){
         JournalComptable journalComptable1 = new JournalComptable();

@@ -15,6 +15,9 @@ import java.util.List;
 
 public class CompteComptableTest {
 
+    /**
+     * Test les getters et les setters de la classe
+     */
     @Test
     public void validateSettersAndGetters() {
         final PojoClass compteComptablePojo = PojoClassFactory.getPojoClass(CompteComptable.class);
@@ -25,6 +28,10 @@ public class CompteComptableTest {
         validator.validate(compteComptablePojo);
     }
 
+    /**
+     * test de la fonction getByNumero
+     * Vérification de récupération d'un élèment d'une liste par rapport à son numéro
+     */
     @Test
     public void getByNumero_returnCompteComptable_listCompteComptableAndNumero(){
         CompteComptable compteComptable1 = new CompteComptable();
