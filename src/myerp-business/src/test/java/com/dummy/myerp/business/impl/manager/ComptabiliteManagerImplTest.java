@@ -534,7 +534,7 @@ public class ComptabiliteManagerImplTest {
 
     /**
      * Test de addReference
-     * Une functionalException est attendu
+     * Une NotFoundException est attendu
      * @throws NotFoundException
      */
     @Test
