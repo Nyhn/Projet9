@@ -31,6 +31,11 @@ public class ComptabiliteManagerImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    /**
+     * Test de la fonction checkEcritureComptableUnit
+     * Vérifie qu'une ecriture comptable vide déclenche une FunctionalEsception
+     * @throws Exception
+     */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnit_throwFunctonalException() throws Exception {
         EcritureComptable vEcritureComptable;
@@ -306,7 +311,7 @@ public class ComptabiliteManagerImplTest {
      * @throws Exception
      */
     @Test
-    public void checkEcritureComptableContext() throws Exception {
+    public void checkEcritureComptableContext_NoReturn_testPassed() throws Exception {
 
         EcritureComptable ecritureComptable;
         ecritureComptable = new EcritureComptable();
@@ -459,8 +464,8 @@ public class ComptabiliteManagerImplTest {
     }
 
     /**
-     * Test de la fonction checkEcritureComptableContext
-     * vérification que la RG6 est respecté
+     * Test de la fonction checkEcritureComptable
+     * vérification que les régles de gestion unitaire et du contexte sont respecté
      * @throws Exception
      */
     @Test
