@@ -368,7 +368,7 @@ public class ConsumerTest extends ConsumerTestCase {
     }
 
     /**
-     * Vérification de la suppression d'une écriture comptable.
+     * Test de suppression d'une écriture comptable.
      */
     @Test
     public void deleteEcritureComptableTest_NoReturn_checkEcritureComptableNotFound() throws ParseException {
