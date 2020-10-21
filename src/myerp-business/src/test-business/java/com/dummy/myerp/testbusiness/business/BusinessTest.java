@@ -235,7 +235,7 @@ public class BusinessTest extends BusinessTestCase {
     }
 
     /**
-     * Test de modification d'une écriture comptable.
+     * Test de modification d'une écriture comptable avec une liste incorrect.
      * @throws Exception
      */
     @Test
@@ -275,7 +275,7 @@ public class BusinessTest extends BusinessTestCase {
     }
 
     /**
-     * Test de modification d'une écriture comptable.
+     * Test de modification d'une écriture comptable avec une référence incorrecte.
      * @throws Exception
      */
     @Test
@@ -357,7 +357,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test d'insertion de la séquence d'écriture comptable.
      */
     @Test
-    public void insertSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComtpable() {
+    public void insertSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComptable() {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
 
