@@ -9,6 +9,10 @@ import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Test;
 
 public class LigneEcritureComptableTest{
+
+    /**
+     * Test les getters et les setters de la classe LigneEcritureComptable
+     */
     @Test
     public void validateSettersAndGetters() {
         final PojoClass LigneEcritureComptablePojo = PojoClassFactory.getPojoClass(LigneEcritureComptable.class);

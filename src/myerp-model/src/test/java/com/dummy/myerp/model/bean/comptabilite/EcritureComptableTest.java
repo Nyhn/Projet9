@@ -15,6 +15,9 @@ import org.junit.Test;
 
 public class EcritureComptableTest {
 
+    /**
+     * Test les getters et les setters
+     */
     @Test
     public void validateSettersAndGetters() {
         final PojoClass EcritureComptablePojo = PojoClassFactory.getPojoClass(EcritureComptable.class);
@@ -25,6 +28,13 @@ public class EcritureComptableTest {
         validator.validate(EcritureComptablePojo);
     }
 
+    /**
+     * Fonction de création d'une ligne d'écriture comptable
+     * @param pCompteComptableNumero numéro d'écriture comptable
+     * @param pDebit débit
+     * @param pCredit crédit
+     * @return Ligne d'écriture comptable
+     */
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
         BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
@@ -36,6 +46,10 @@ public class EcritureComptableTest {
         return vRetour;
     }
 
+    /**
+     * Test de la fonction isEquilibre d'une écriture comptable
+     * renvoie true
+     */
     @Test
     public void isEquilibree() {
         EcritureComptable vEcriture;
@@ -48,6 +62,11 @@ public class EcritureComptableTest {
         vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
         Assert.assertTrue(vEcriture.toString(), vEcriture.isEquilibree());
     }
+
+    /**
+     * Test de la fonction isEquilibre d'une écriture comptable
+     * renvoie false
+     */
     @Test
     public void isNotEquilibree() {
         EcritureComptable vEcriture;
@@ -61,6 +80,10 @@ public class EcritureComptableTest {
         Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
     }
 
+    /**
+     * Test de la fonction getTotalDebit
+     * vérifie que le chiffre renvoie le résultat attendu
+     */
     @Test
     public void getTotalDebit_returnBigDecimal_EcritureComptable(){
         EcritureComptable vEcriture;
@@ -80,6 +103,10 @@ public class EcritureComptableTest {
         Assert.assertTrue(vEcriture.getTotalDebit().compareTo(result) == 0);
     }
 
+    /**
+     * Test de la fonction getTotalCredit
+     * vérifie que le chiffre renvoie le résultat attendu
+     */
     @Test
     public void getTotalCredit_returnBigDecimal_EcritureComptable(){
         EcritureComptable vEcriture;

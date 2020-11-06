@@ -11,6 +11,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SequenceEcritureComptableTest {
+    /**
+     * Test les getters et les setters de la classe SequenceEcritureComptable
+     */
     @Test
     public void validateSettersAndGetters() {
         final PojoClass SequenceEcritureComptablePojo = PojoClassFactory.getPojoClass(SequenceEcritureComptable.class);
@@ -21,6 +24,9 @@ public class SequenceEcritureComptableTest {
         validator.validate(SequenceEcritureComptablePojo);
     }
 
+    /**
+     * Test le constructeur de la classe SequenceEcritureComptable
+     */
     @Test
     public void validateConstrutor() {
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("VE", 2020, 13);
