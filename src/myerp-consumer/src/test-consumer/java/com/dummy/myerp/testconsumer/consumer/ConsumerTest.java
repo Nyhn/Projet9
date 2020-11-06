@@ -93,7 +93,9 @@ public class ConsumerTest extends ConsumerTestCase {
      *
      */
     @Test
+
     public void getListEcritureComptableTest_listEcritureComtable_checkFirstEcritureComptableAndSizeListEqual5() throws ParseException {
+
         List<EcritureComptable> listEcritureComptable = comptabiliteDao.getListEcritureComptable();
 
         assertTrue("La liste des écritures n'est pas égale à 5", listEcritureComptable.size() == 5);

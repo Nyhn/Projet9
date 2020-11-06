@@ -20,6 +20,16 @@ public class BusinessTest extends BusinessTestCase {
     private ComptabiliteManagerImpl comptabiliteManager = new ComptabiliteManagerImpl();
     private ComptabiliteDaoImpl comptabiliteDao = ComptabiliteDaoImpl.getInstance();
 
+    /**
+     * Fonction de création d'un écriture comptable
+     * @param id id de l'écriture comptable
+     * @param journalComptable journalComptable de l'écriture comptable
+     * @param reference référence de l'écriture comptable
+     * @param date date de l'écriture comptable
+     * @param libelle libellé de l'écriture comptable
+     * @param listLigneEcriture la liste de ligne d'écriture de l'écriture comptable
+     * @return l'écriture comptable
+     */
     private EcritureComptable createEcritureComptable(Integer id, JournalComptable journalComptable, String reference, Date date, String libelle, List<LigneEcritureComptable> listLigneEcriture) {
         EcritureComptable ecritureComptable = new EcritureComptable();
         ecritureComptable.setId(id);
@@ -34,6 +44,7 @@ public class BusinessTest extends BusinessTestCase {
     }
 
     /**
+
      * Test de la récupération de la liste des comptes comptables.
      */
     @Test
@@ -68,6 +79,7 @@ public class BusinessTest extends BusinessTestCase {
      */
     @Test
     public void insertEcritureComptableTest_NoReturn_checkEcritureComptable() throws ParseException {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -81,6 +93,7 @@ public class BusinessTest extends BusinessTestCase {
         }
 
         CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+
         LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
         LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
         List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
@@ -96,10 +109,12 @@ public class BusinessTest extends BusinessTestCase {
         }
 
         List<EcritureComptable> listEcritureComptable = comptabiliteManager.getListEcritureComptable();
+
         Iterator it = listEcritureComptable.listIterator();
         boolean testCheck = false;
         while (it.hasNext()) {
             EcritureComptable ecritureInseree = (EcritureComptable) it.next();
+
             if(ecritureInseree.getId() != null &&
                 StringUtils.equals(ecritureInseree.getJournal().getCode(), ecritureComptable.getJournal().getCode()) &&
                 StringUtils.equals(ecritureInseree.getReference(), ecritureComptable.getReference()) &&
@@ -112,22 +127,26 @@ public class BusinessTest extends BusinessTestCase {
                 testCheck = true;
             }
         }
+
        assertTrue("Les données de l'écriture insérée n'est pas égales à l'écriture d'origine", testCheck);
         comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
     }
 
     /**
+
      * Test d'insertion d'une écriture ne respectant pas les règles de gestion.
      * vérification de l'écriture avant insertion
      * @throws FunctionalException
      */
     @Test (expected = FunctionalException.class)
     public void insertEcritureComptable_NoReturn_throwFunctionalException() throws FunctionalException {
+
         EcritureComptable ecritureComptable = new EcritureComptable();
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
     }
 
     /**
+
      *  Test d'ajout d'une référence à une écriture comptable.
      *  Puis vérification que la référence a bien été ajouté à l'écriture
      *  Vérification que l'écriture respecte les règles de gestion.
@@ -135,6 +154,7 @@ public class BusinessTest extends BusinessTestCase {
      */
     @Test
     public void addReferenceTest_NoReturn_checkAdd() throws ParseException {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
@@ -148,6 +168,7 @@ public class BusinessTest extends BusinessTestCase {
         }
 
         CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+
         LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne 1", BigDecimal.valueOf(200), null);
         LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne 2", null, BigDecimal.valueOf(200));
         List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
@@ -155,6 +176,7 @@ public class BusinessTest extends BusinessTestCase {
         ligneEcritureComptableList.add(ligneEcritureComptable1);
 
         EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, null, date, "ecriture insérée", ligneEcritureComptableList);
+
         comptabiliteManager.addReference(ecritureComptable);
 
         assertNotEquals("Erreur d'insertion de la référence", null, ecritureComptable.getReference());
@@ -167,6 +189,7 @@ public class BusinessTest extends BusinessTestCase {
     }
 
     /**
+
      * Test de mise à jour d'une écriture comptable.
      * Insertion d'une écriture, puis modification.
      * Vérification de la modification dans la bdd
@@ -174,6 +197,7 @@ public class BusinessTest extends BusinessTestCase {
      */
     @Test
     public void updateEcritureComptableTest_NoReturn_checkEcritureComptable() throws Exception {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
@@ -191,6 +215,7 @@ public class BusinessTest extends BusinessTestCase {
         }
 
         CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+
         LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne 1", BigDecimal.valueOf(200), null);
         LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne 2", null, BigDecimal.valueOf(200));
         List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
@@ -217,6 +242,7 @@ public class BusinessTest extends BusinessTestCase {
         Iterator iterator = listEcritureComptable.listIterator();
         boolean testCheck = false;
 
+
         while (iterator.hasNext()) {
             EcritureComptable ecriture = (EcritureComptable) iterator.next();
             if (ecriture.getId().equals(ecritureComptableModifiee.getId()) &&
@@ -230,7 +256,9 @@ public class BusinessTest extends BusinessTestCase {
                 testCheck = true;
             }
         }
+
         assertTrue("Erreur dans la mise à jour de l'écriture comptable", testCheck);
+
         comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
     }
 
@@ -240,6 +268,7 @@ public class BusinessTest extends BusinessTestCase {
      */
     @Test
     public void updateEcritureComptableTest_NoReturn_incorrectList() throws Exception {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
 
@@ -253,6 +282,7 @@ public class BusinessTest extends BusinessTestCase {
         }
 
         CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
+
         LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
         LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
         List<LigneEcritureComptable> ligneEcritureComptableList = new ArrayList<>();
@@ -265,6 +295,7 @@ public class BusinessTest extends BusinessTestCase {
         List<LigneEcritureComptable> ligneEcritureComptableList1 = new ArrayList<>();
         EcritureComptable ecritureComptableInvalide = createEcritureComptable(ecritureComptable.getId(), journalComptable, "AC-2018/09999", date, "ecriture modifié test update incorrect liste", ligneEcritureComptableList1);
 
+
         try {
             comptabiliteManager.updateEcritureComptable(ecritureComptableInvalide);
             comptabiliteManager.deleteEcritureComptable(ecritureComptable.getId());
@@ -275,11 +306,13 @@ public class BusinessTest extends BusinessTestCase {
     }
 
     /**
+
      * Test de modification d'une écriture comptable avec une référence incorrecte.
      * @throws Exception
      */
     @Test
     public void updateEcritureComptableTest_NoReturn_IncorrectRef() throws Exception {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2020/09/18 00:00:00");
 
@@ -299,10 +332,12 @@ public class BusinessTest extends BusinessTestCase {
         ligneEcritureComptableList.add(ligneEcritureComptable);
         ligneEcritureComptableList.add(ligneEcritureComptable1);
 
+
         EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2020/09999", date, "ecriture insérée", ligneEcritureComptableList);
 
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
         EcritureComptable ecritureComptableInvalide = createEcritureComptable(ecritureComptable.getId(), journalComptable, "", date, "ecriture insérée", ligneEcritureComptableList);
+
 
         try {
             comptabiliteManager.updateEcritureComptable(ecritureComptableInvalide);
@@ -315,6 +350,7 @@ public class BusinessTest extends BusinessTestCase {
 
     /**
      * Test de suppression d'une écriture comptable.
+
      * Création d'une écriture comptable, Puis suppression.
      * Vérification de la suppression.
      */
@@ -322,6 +358,7 @@ public class BusinessTest extends BusinessTestCase {
     public void deleteEcritureComptableTest_NoReturn_checkEcritureComtpable() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2018/12/19 00:00:00");
+
 
         JournalComptable journalComptable = new JournalComptable();
 
@@ -332,6 +369,7 @@ public class BusinessTest extends BusinessTestCase {
             }
         }
 
+
         CompteComptable compteComptable = comptabiliteManager.getListCompteComptable().get(0);
         LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable(compteComptable, "Ligne1", BigDecimal.valueOf(1500), null);
         LigneEcritureComptable ligneEcritureComptable1 = new LigneEcritureComptable(compteComptable, "Ligne2", null, BigDecimal.valueOf(1500));
@@ -340,6 +378,7 @@ public class BusinessTest extends BusinessTestCase {
         ligneEcritureComptableList.add(ligneEcritureComptable1);
 
         EcritureComptable ecritureComptable = createEcritureComptable(null, journalComptable, "AC-2018/09999", date, "ecriture insérée", ligneEcritureComptableList);
+
 
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
 
@@ -358,19 +397,24 @@ public class BusinessTest extends BusinessTestCase {
      */
     @Test
     public void insertSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComptable() {
+
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable("OD", 2020, 1);
         comptabiliteManager.insertSequenceEcritureComptable(sequenceEcritureComptable);
 
         try {
             SequenceEcritureComptable sequenceEcritureComptable1 = comptabiliteDao.getSequenceEcritureComptable(sequenceEcritureComptable.getJournalCode(), sequenceEcritureComptable.getAnnee());
         } catch (NotFoundException e) {
+
             fail("Erreur d'insertion de la séquence d'écriture comptable" + e.getMessage());
+
         }
         comptabiliteDao.deleteSequenceEcritureComptable(sequenceEcritureComptable.getJournalCode(), sequenceEcritureComptable.getAnnee());
     }
 
     /**
      * Test de modification de la séquence d'écriture comptable.
+
+
      */
     @Test
     public void updateSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComptable() {
@@ -392,8 +436,10 @@ public class BusinessTest extends BusinessTestCase {
 
     /**
      * Test de suppression d'une séquence d'écriture comptable.
+
      * Insertion d'une séquence, Puis suppression et on la recherche en BDD.
      * @throws Exception
+
      */
     @Test (expected = NotFoundException.class)
     public void deleteSequenceEcritureComptableTest_NoReturn_checkSequenceEcritureComptable() throws Exception {
