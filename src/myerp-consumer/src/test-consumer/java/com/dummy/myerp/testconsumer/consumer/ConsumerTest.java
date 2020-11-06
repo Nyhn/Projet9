@@ -81,7 +81,7 @@ public class ConsumerTest extends ConsumerTestCase {
     /**
      * Test de récupération de la liste des écritures comptables
      * Vérification que la taille de liste est égale à 5
-     * et que la première écriture comptable vaut :
+     * et que la dernière écriture comptable vaut :
      * - id = -5
      * - code journal = BQ
      * - reference = BQ-2016/00005
