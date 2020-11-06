@@ -101,14 +101,14 @@ public class ConsumerTest extends ConsumerTestCase {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         Date date = simpleDateFormat.parse("2016/12/27 00:00:00");
         boolean testCheck = false;
-        if(listEcritureComptable.get(0).getId() == -5 &&
-                StringUtils.equals(listEcritureComptable.get(0).getJournal().getCode(), "BQ") &&
-                StringUtils.equals(listEcritureComptable.get(0).getReference(), "BQ-2016/00005") &&
-                StringUtils.equals(listEcritureComptable.get(0).getLibelle(), "Paiement Facture C110002") &&
-                listEcritureComptable.get(0).getDate().compareTo(date) == 0 &&
-                listEcritureComptable.get(0).getListLigneEcriture().size() == 2 &&
-                listEcritureComptable.get(0).getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
-                listEcritureComptable.get(0).getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
+        if(listEcritureComptable.get(4).getId() == -5 &&
+                StringUtils.equals(listEcritureComptable.get(4).getJournal().getCode(), "BQ") &&
+                StringUtils.equals(listEcritureComptable.get(4).getReference(), "BQ-2016/00005") &&
+                StringUtils.equals(listEcritureComptable.get(4).getLibelle(), "Paiement Facture C110002") &&
+                listEcritureComptable.get(4).getDate().compareTo(date) == 0 &&
+                listEcritureComptable.get(4).getListLigneEcriture().size() == 2 &&
+                listEcritureComptable.get(4).getListLigneEcriture().get(1).getCompteComptable().getNumero() == 411 &&
+                listEcritureComptable.get(4).getListLigneEcriture().get(1).getCredit().compareTo(BigDecimal.valueOf(3000)) == 0)
         {
             testCheck = true;
         }
