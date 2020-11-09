@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
 
 public class BusinessTest extends BusinessTestCase {
 
-    private ComptabiliteManagerImpl comptabiliteManager = new ComptabiliteManagerImpl();
-    private ComptabiliteDaoImpl comptabiliteDao = ComptabiliteDaoImpl.getInstance();
+    private final ComptabiliteManagerImpl comptabiliteManager = new ComptabiliteManagerImpl();
+    private final ComptabiliteDaoImpl comptabiliteDao = ComptabiliteDaoImpl.getInstance();
 
     /**
      * Fonction de création d'un écriture comptable
@@ -136,7 +136,7 @@ public class BusinessTest extends BusinessTestCase {
 
      * Test d'insertion d'une écriture ne respectant pas les règles de gestion.
      * vérification de l'écriture avant insertion
-     * @throws FunctionalException
+     * @throws FunctionalException FunctionalException
      */
     @Test (expected = FunctionalException.class)
     public void insertEcritureComptable_NoReturn_throwFunctionalException() throws FunctionalException {
@@ -227,7 +227,6 @@ public class BusinessTest extends BusinessTestCase {
         comptabiliteManager.insertEcritureComptable(ecritureComptable);
 
         Date date1 = simpleDateFormat.parse("2020/09/18 00:00:00");
-        JournalComptable journalComptable2 = comptabiliteManager.getListJournalComptable().get(1);
 
         LigneEcritureComptable ligneEcritureComptable2 = new LigneEcritureComptable(compteComptable, "Ligne 3", BigDecimal.valueOf(500), null);
         LigneEcritureComptable ligneEcritureComptable3 = new LigneEcritureComptable(compteComptable, "Ligne 4", null, BigDecimal.valueOf(500));
@@ -264,7 +263,7 @@ public class BusinessTest extends BusinessTestCase {
 
     /**
      * Test de modification d'une écriture comptable avec une liste incorrect.
-     * @throws Exception
+     * @throws Exception Exception
      */
     @Test
     public void updateEcritureComptableTest_NoReturn_incorrectList() throws Exception {
@@ -308,7 +307,7 @@ public class BusinessTest extends BusinessTestCase {
     /**
 
      * Test de modification d'une écriture comptable avec une référence incorrecte.
-     * @throws Exception
+     * @throws Exception Exception
      */
     @Test
     public void updateEcritureComptableTest_NoReturn_IncorrectRef() throws Exception {
@@ -438,7 +437,7 @@ public class BusinessTest extends BusinessTestCase {
      * Test de suppression d'une séquence d'écriture comptable.
 
      * Insertion d'une séquence, Puis suppression et on la recherche en BDD.
-     * @throws Exception
+     * @throws Exception Exception
 
      */
     @Test (expected = NotFoundException.class)

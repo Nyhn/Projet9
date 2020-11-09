@@ -39,32 +39,6 @@ Il comporte :
     docker-compose rm -v
     docker-compose up
     
-## Travails effectués ( Date : 14/10/2020 )
+### Travails effectués ( Date : 14/10/2020 )
 
-### Codes d'implementation ajoutés au projet ( TODO )
-
-* Couche Business, classe ComptabiliteManagerImpl, `AddReference()` : Ajoute une référence à l'écriture comptable. 
-* Couche Business, classe ComptabiliteManagerImpl, `checkEcritureComptableUnit()` : Vérifie la norme RG5 : Format et contenu de la référence.
-* 
-
-### Codes d'implementation secondaire ajoutés 
-
-### Tests unitaire de classe Business rajoutés au projet 
-
-* Couche Business, Test unitaire, ComptabiliteMangerImpl,
-
-### Tests d'intégration de classe Business rajoutés au projet 
-
-### Tests unitaire de classe model rajoutés au projet
-
-### Tests d'intégration de la classe consumer rajoutés au projet
-
-
-### Erreurs corrigés du projet
-
-* Couche myerp-model, classe EcritureComptable, la méthode getTotalCredit() récupérait le débit de l'écriture comptable et non le crédit (@ANO #0001)
-* Couche myerp-model, classe EcritureComptable, dans la méthode isEquilibree(), la comparaison n'était pas faite correctement (utilisation d'equals() au lieu de compareTo()) (@ANO #0002)
-* Couche myerp-model, classe EcritureComptable, le pattern de l'attribut reference n'était pas correct. Il doit prendre en compte les caractères autre que des chiffres pour le code journal. (@ANO #0003)
-* Couche myerp-model, classe SequenceEcritureComptable, l'attribut journalCode était manquant (ainsi que le getter et le setter associé). (@ANO #0004)
-* Couche myerp-consumer, fichier sqlContext.xml, la requête SQLinsertListLigneEcritureComptable était incorrecte, une virgule était manquante. (@ANO #0005)
-* Couche myerp-business, classe ComptabiliteManagerImpl, dans la méthode updateEcritureComptable(), la vérification de l'écriture comptable n'était pas faite avant l'update. (@ANO #0006)
+Voir pdf `TravailEffectue.pdf`
