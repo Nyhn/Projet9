@@ -15,7 +15,7 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-public class BusinessTest extends BusinessTestCase {
+public class BusinessTest extends BusinessTestCase{
 
     private final ComptabiliteManagerImpl comptabiliteManager = new ComptabiliteManagerImpl();
     private final ComptabiliteDaoImpl comptabiliteDao = ComptabiliteDaoImpl.getInstance();

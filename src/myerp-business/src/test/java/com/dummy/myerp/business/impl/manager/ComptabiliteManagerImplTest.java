@@ -34,7 +34,7 @@ public class ComptabiliteManagerImplTest {
     /**
      * Test de la fonction checkEcritureComptableUnit
      * Vérifie qu'une ecriture comptable vide déclenche une FunctionalEsception
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnit_throwFunctonalException() throws Exception {
@@ -45,7 +45,7 @@ public class ComptabiliteManagerImplTest {
 
     /**
      * Test de la fonction checkEcritureComptableUnit
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test
     public void checkEcritureComptableUnit_testPassed() throws Exception {
@@ -67,7 +67,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG2 n'est pas respecté
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG2_NoEquilibre_ThrowFunctionalException() throws Exception {
@@ -89,7 +89,7 @@ public class ComptabiliteManagerImplTest {
     /**
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG2 est respecté
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test
     public void checkEcritureComptableUnitRG2_Equilibre_DontThrowException() throws Exception {
@@ -112,7 +112,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG3 n'est pas respecté (car 2 débit sans crédit)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG3_WithTwoDebit_throwFunctionalException() throws Exception {
@@ -135,7 +135,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG3 n'est pas respecté (car une seule ligne)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG3_WithOneLine_throwFunctionalException() throws Exception {
@@ -155,7 +155,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG3 n'est pas respecté (car 2 crédit sans débit)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG3_WithTwoCredit_throwFunctionalException() throws Exception {
@@ -178,7 +178,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG3 n'est pas respecté (car 3 crédit sans débit)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG3_WithThreeCredit_throwFunctionalException() throws Exception {
@@ -204,7 +204,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG3 est respecté (car 3 lignes avec au moins 1 débit et 1 crédit)
      * une functionalException n'est pas attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test
     public void checkEcritureComptableUnitRG3AndRG2_WithThreeLine_NoThrowFunctionalException() throws Exception {
@@ -259,7 +259,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG5 n'est pas respecté (car mauvaise année)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
      @Test(expected = FunctionalException.class)
      public void checkEcritureComptableUnitRG5_BadYear_ThrowFunctionalException() throws Exception {
@@ -284,7 +284,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableUnit
      * vérification que la RG5 n'est pas respecté (car mauvais code)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG5_BadCode_ThrowFunctionalException() throws Exception {
@@ -308,7 +308,7 @@ public class ComptabiliteManagerImplTest {
 
     /**
      * Test de la fonction checkEcritureComptableContext
-     * @throws Exception
+     * @throws Exception Exception
      */
     @Test
     public void checkEcritureComptableContext_NoReturn_testPassed() throws Exception {
@@ -341,7 +341,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableContext
      * vérification que la RG6 n'est pas respecté (car ecritureComptable déjà existante)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableContextRG6_double_throwFunctionalException() throws Exception {
@@ -388,7 +388,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableContext
      * vérification que la RG6 n'est pas respecté (car une nouvelle ecritureComptable est déjà existante)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableContextRG6_NewEcritureComptableFound_throwFunctionalException() throws Exception {
@@ -435,7 +435,7 @@ public class ComptabiliteManagerImplTest {
      * Test de la fonction checkEcritureComptableContext
      * vérification que la RG6 n'est pas respecté (car ecritureComptable n'existe pas)
      * une functionalException est attendu
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test
     public void checkEcritureComptableContextRG6_EcritureComptableNotFound_throwFunctionalException() throws Exception {
@@ -466,7 +466,7 @@ public class ComptabiliteManagerImplTest {
     /**
      * Test de la fonction checkEcritureComptable
      * vérification que les régles de gestion unitaire et du contexte sont respecté
-     * @throws Exception
+     * @throws Exception FunctionalException
      */
     @Test
     public void checkEcritureComptable_NoReturn_NotThrowException() throws Exception {
@@ -497,7 +497,7 @@ public class ComptabiliteManagerImplTest {
 
     /**
      * Test de addReference
-     * @throws NotFoundException
+     * @throws NotFoundException FunctionalException
      */
     @Test
     public void addReference_NoReturn_EcritureComptable() throws NotFoundException {
@@ -535,7 +535,7 @@ public class ComptabiliteManagerImplTest {
     /**
      * Test de addReference
      * Une NotFoundException est attendu
-     * @throws NotFoundException
+     * @throws NotFoundException FunctionalException
      */
     @Test
     public void addReference_NoReturn_EcritureComptable_ThrowNotFoundException() throws NotFoundException {
