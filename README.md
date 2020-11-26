@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Nyhn/Projet9.svg?branch=master)](https://travis-ci.com/Nyhn/Projet9)
+
 # MyERP
 
 ## Organisation du répertoire
