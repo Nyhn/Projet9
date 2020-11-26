@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Nyhn/Projet9.svg?branch=master)](https://travis-ci.com/Nyhn/Projet9)
+[![Build Status](https://travis-ci.com/Nyhn/Projet9.svg?branch=master)](https://travis-ci.com/Nyhn/Projet9)  [![Coverage Status](https://coveralls.io/repos/github/Nyhn/Projet9/badge.svg)](https://coveralls.io/github/Nyhn/Projet9)
 
 # MyERP
 
